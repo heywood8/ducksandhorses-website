@@ -1,0 +1,7 @@
+---
+import { siteConfig } from '../lib/siteConfig';
+const enabled = siteConfig.features.analytics && siteConfig.analytics.plausibleDomain;
+---
+{enabled && (
+  <script is:inline defer data-domain={siteConfig.analytics.plausibleDomain} src="https://plausible.io/js/script.js"></script>
+)}

@@ -76,3 +76,33 @@
     --transition-base: 0ms;
   }
 }
+
+/* Dark mode (auto + manual override) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f172a;
+    --color-bg-alt: #1e293b;
+    --color-fg: #f1f5f9;
+    --color-fg-mid: #cbd5e1;
+    --color-border: #334155;
+    --color-surface: #1e293b;
+  }
+}
+
+[data-theme='dark'] {
+  --color-bg: #0f172a;
+  --color-bg-alt: #1e293b;
+  --color-fg: #f1f5f9;
+  --color-fg-mid: #cbd5e1;
+  --color-border: #334155;
+  --color-surface: #1e293b;
+}
+
+[data-theme='light'] {
+  --color-bg: #ffffff;
+  --color-bg-alt: #f1f5f9;
+  --color-fg: #0f172a;
+  --color-fg-mid: #475569;
+  --color-border: #e2e8f0;
+  --color-surface: #ffffff;
+}
