@@ -28,7 +28,7 @@ const formEndpoint = siteConfig.form.endpoint || '#';
         <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
       </div>
       <input type="hidden" name="timeOnPage" id="timeOnPage" value="0" />
-      <p id="contact-disclaimer" class="muted" style="font-size:var(--font-size-sm);">If you are experiencing a crisis, do not use this form—visit the <a href="/emergency">Emergency</a> page for resources.</p>
+  {(() => { const base = import.meta.env.BASE_URL.replace(/\/$/, ''); return <p id="contact-disclaimer" class="muted" style="font-size:var(--font-size-sm);">If you are experiencing a crisis, do not use this form—visit the <a href={base + '/emergency'}>Emergency</a> page for resources.</p>; })()}
       <button id="contactSubmit" type="submit" disabled style="background:var(--color-primary);color:#fff;padding:var(--space-3) var(--space-5);border:none;border-radius:var(--radius-sm);font-size:var(--font-size-md);cursor:not-allowed;opacity:.6;">Submit (Disabled Placeholder)</button>
     </div>
   </form>

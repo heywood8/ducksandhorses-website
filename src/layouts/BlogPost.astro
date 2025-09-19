@@ -20,6 +20,7 @@ interface Props {
 const { title, description, pubDate, updatedDate, tags, heroImage, canonical, bodyHtml } = Astro.props as Props;
 const rt = readingTime(bodyHtml.replace(/<[^>]+>/g, '')); // strip HTML for counting
 const pageCanonical = canonical || canonicalFor(Astro.url.pathname);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const articleLd = {
   '@context': 'https://schema.org',
@@ -53,7 +54,7 @@ const articleLd = {
       </p>
       {tags.length > 0 && (
         <ul style="display:flex;gap:var(--space-2);flex-wrap:wrap;list-style:none;padding:0;margin:var(--space-3)_0_0;">
-          {tags.map(t => <li style="background:var(--color-surface-subtle);padding:2px 8px;border-radius:var(--radius-sm);font-size:var(--font-size-xs);"><a href={`/blog/tags/${encodeURIComponent(t.toLowerCase())}`}>{t}</a></li>)}
+          {tags.map(t => <li style="background:var(--color-surface-subtle);padding:2px 8px;border-radius:var(--radius-sm);font-size:var(--font-size-xs);"><a href={`${base}/blog/tags/${encodeURIComponent(t.toLowerCase())}`}>{t}</a></li>)}
         </ul>
       )}
       {heroImage && <img src={heroImage} alt="" style="margin-top:var(--space-5);max-width:100%;border-radius:var(--radius-md);" />}

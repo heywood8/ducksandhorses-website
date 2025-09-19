@@ -5,9 +5,12 @@ import Layout from '../../layouts/Layout.astro';
   <h1>Services</h1>
   <p>High-level summary of services. Each service will eventually link to more detailed pages or sections (Individual Therapy, Couples Therapy, Telehealth, Modalities).</p>
   <ul>
-    <li><a href="/services/individual">Individual Therapy</a> – Personalized one-on-one sessions.</li>
-    <li><a href="/services/couples">Couples Therapy</a> – Support for relationship dynamics.</li>
-    <li><a href="/services/telehealth">Telehealth</a> – Remote sessions (if applicable).</li>
-    <li><a href="/services/modalities">Modalities</a> – Approaches like CBT, ACT, mindfulness. (Future structured content)</li>
+      {(() => { const base = import.meta.env.BASE_URL.replace(/\/$/, ''); return (
+        <Fragment>
+          <li><a href={`${base}/services/individual`}>Individual Therapy</a> – Personalized one-on-one sessions.</li>
+          <li><a href={`${base}/services/couples`}>Couples Therapy</a> – Support for relationship dynamics.</li>
+          <li><a href={`${base}/services/telehealth`}>Telehealth</a> – Remote sessions (if applicable).</li>
+          <li><a href={`${base}/services/modalities`}>Modalities</a> – Approaches like CBT, ACT, mindfulness. (Future structured content)</li>
+        </Fragment> ); })()}
   </ul>
 </Layout>
