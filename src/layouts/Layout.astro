@@ -52,7 +52,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         }
       })();
     </script>
-    <header class="site-header" role="banner">
+    <header class="site-header" role="banner" style="position:relative;">
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;">
   <div class="logo" style="display:flex;align-items:center;gap:var(--space-2);font-weight:600;font-size:var(--font-size-lg);">
     <a href={base + '/'} aria-label="Home" style="display:flex;align-items:center;gap:var(--space-2);text-decoration:none;color:inherit;">
@@ -67,11 +67,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             <li><a href={base + '/conditions'} class={Astro.url.pathname.startsWith(base + '/conditions') || Astro.url.pathname.startsWith('/conditions') ? 'active' : ''}>Conditions</a></li>
             <li><a href={base + '/contact'} class={Astro.url.pathname.startsWith(base + '/contact') || Astro.url.pathname.startsWith('/contact') ? 'active' : ''}>Contact</a></li>
           </ul>
-          <button type="button" id="theme-toggle" style="background:var(--color-bg-alt);border:1px solid var(--color-border);padding:4px 10px;border-radius:var(--radius-sm);cursor:pointer;font-size:var(--font-size-xs);">
-            <span data-theme-label>Toggle theme</span>
-          </button>
         </nav>
       </div>
+      <button type="button" id="theme-toggle" aria-label="Toggle dark mode" class="theme-icon-btn" style="position:absolute;top:8px;right:8px;">
+        <svg data-icon-sun xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg data-icon-moon xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 0 0 12 21a9 9 0 0 1 9-8.21Z"/></svg>
+      </button>
     </header>
     <main id="main" class="main">
       <div class="container">
@@ -93,7 +94,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         }
         const btn = document.getElementById('theme-toggle');
         if (!btn) return;
-        const label = btn.querySelector('[data-theme-label]');
+        const sun = btn.querySelector('[data-icon-sun]');
+        const moon = btn.querySelector('[data-icon-moon]');
         function current(){
           const attr = root.getAttribute('data-theme');
           if (attr) return attr;
@@ -101,7 +103,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         }
         function render(){
           const mode = current();
-            if(label) label.textContent = mode === 'dark' ? 'Light mode' : 'Dark mode';
+          if (sun && moon) {
+            if (mode === 'dark') {
+              sun.style.display = 'none';
+              moon.style.display = '';
+              btn.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+              sun.style.display = '';
+              moon.style.display = 'none';
+              btn.setAttribute('aria-label', 'Switch to dark mode');
+            }
+          }
         }
         btn.addEventListener('click', () => {
           const mode = current();
