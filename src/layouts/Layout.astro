@@ -63,10 +63,10 @@ const computedCanonical = canonical || canonicalFor(pathname);
   </div>
         <nav aria-label="Main navigation" style="display:flex;align-items:center;gap:var(--space-4);">
           <ul class="nav">
-            <li><a href={base + '/'} class={pathname === base + '/' || pathname === '/' ? 'active' : ''}>Обо мне</a></li>
-            <li><a href={base + '/services'} class={pathname.includes('/services') ? 'active' : ''}>Услуги</a></li>
-            <li><a href={base + '/conditions'} class={pathname.includes('/conditions') ? 'active' : ''}>С чем работаю</a></li>
-            <li><a href={base + '/schedule'} class={pathname.includes('/schedule') ? 'active' : ''}>Запись</a></li>
+            <li><a href={base + '/'} class={pathname === base + '/' || pathname === '/' ? 'active' : ''} aria-current={(pathname === base + '/' || pathname === '/') ? 'page' : undefined}>Обо мне</a></li>
+            <li><a href={base + '/services'} class={pathname.includes('/services') ? 'active' : ''} aria-current={pathname.includes('/services') ? 'page' : undefined}>Услуги</a></li>
+            <li><a href={base + '/conditions'} class={pathname.includes('/conditions') ? 'active' : ''} aria-current={pathname.includes('/conditions') ? 'page' : undefined}>С чем работаю</a></li>
+            <li><a href={base + '/schedule'} class={pathname.includes('/schedule') ? 'active' : ''} aria-current={pathname.includes('/schedule') ? 'page' : undefined}>Запись</a></li>
           </ul>
         </nav>
       </div>
