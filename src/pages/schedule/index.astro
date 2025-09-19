@@ -2,20 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<Layout title="Запись" description="Записаться на первую встречу или регулярную терапевтическую сессию." canonical={base + '/schedule/'}>
+<Layout title="Запись" description="Записаться на первую встречу (знакомство) или регулярную консультацию." canonical={base + '/schedule/'}>
   <h1>Запись</h1>
-  <p>Вы можете выбрать подходящее время с помощью ссылок ниже. Откроется защищённое всплывающее окно Calendly. Этот сайт не сохраняет ваши данные.</p>
+  <p>Здесь вы можете выбрать время. Откроется защищённое окно Calendly — этот сайт сам по себе не сохраняет ваши персональные данные записи.</p>
   <section aria-labelledby="first-meeting-heading" style="margin-top:var(--space-8);">
-    <h2 id="first-meeting-heading">Первая встреча</h2>
-    <p class="muted" style="font-size:var(--font-size-sm);margin-top:0;">30‑минутная вводная беседа.</p>
-    <p><a class="schedule-link" href="https://calendly.com/masachusec1/30min" data-calendly-base="https://calendly.com/masachusec1/30min">Открыть окно записи (первая встреча)</a></p>
-    <noscript><p>JavaScript отключён. Можно записаться напрямую: <a href="https://calendly.com/masachusec1/30min" rel="nofollow noopener">Calendly 30min</a>.</p></noscript>
+    <h2 id="first-meeting-heading">Первая встреча (знакомство)</h2>
+    <p class="muted" style="font-size:var(--font-size-sm);margin-top:0;">30 минут, бесплатно. Цель — понять формат и запрос.</p>
+    <p><a class="schedule-link" href="https://calendly.com/masachusec1/30min" data-calendly-base="https://calendly.com/masachusec1/30min">Записаться (знакомство)</a></p>
+    <noscript><p>JavaScript отключён. Прямая ссылка: <a href="https://calendly.com/masachusec1/30min" rel="nofollow noopener">Calendly 30min</a>.</p></noscript>
   </section>
   <section aria-labelledby="regular-session-heading" style="margin-top:var(--space-9);">
-    <h2 id="regular-session-heading">Регулярная сессия</h2>
-    <p class="muted" style="font-size:var(--font-size-sm);margin-top:0;">Стандартная последующая встреча.</p>
-    <p><a class="schedule-link" href="https://calendly.com/masachusec1/clone" data-calendly-base="https://calendly.com/masachusec1/clone">Открыть окно записи (сессия)</a></p>
-    <noscript><p>JavaScript отключён. Можно записаться напрямую: <a href="https://calendly.com/masachusec1/clone" rel="nofollow noopener">Calendly regular session</a>.</p></noscript>
+    <h2 id="regular-session-heading">Регулярная консультация</h2>
+    <p class="muted" style="font-size:var(--font-size-sm);margin-top:0;">55 минут, 1500 ₽. Обычно еженедельно.</p>
+    <p><a class="schedule-link" href="https://calendly.com/masachusec1/clone" data-calendly-base="https://calendly.com/masachusec1/clone">Записаться (консультация)</a></p>
+    <noscript><p>JavaScript отключён. Прямая ссылка: <a href="https://calendly.com/masachusec1/clone" rel="nofollow noopener">Calendly regular session</a>.</p></noscript>
   </section>
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
