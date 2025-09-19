@@ -1,8 +1,40 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { siteConfig, canonicalFor } from '../lib/siteConfig';
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: siteConfig.author,
+  url: canonicalFor(Astro.url.pathname),
+  jobTitle: 'Psychologist',
+  description: 'Evidence-based, compassionate psychological care.',
+  sameAs: [
+    siteConfig.social.linkedIn || undefined,
+    siteConfig.social.directoryProfile || undefined
+  ].filter(Boolean)
+};
 ---
-<Layout title="Ducks and horses | Home" description="Evidence-based, compassionate psychological care.">
-  <h1>Welcome</h1>
-  <p>This is the early scaffold of the psychologist website. Content and design will evolve phase by phase.</p>
-  <p>Next steps: build out design tokens, navigation, and core pages as outlined in the roadmap.</p>
+<Layout title="About me" description="Approach, philosophy, and qualifications." canonical={canonicalFor('/')}> 
+  <Fragment slot="head">
+    <StructuredData data={person} />
+  </Fragment>
+  <h1>About Me</h1>
+  <p>Evidence-based, compassionate psychological care with a focus on sustainable change, clarity, and respect. This site will expand with detailed modality explanations and resources over time.</p>
+  <section>
+    <h2>Approach & Philosophy</h2>
+    <p>I take a collaborative, goal-oriented stance—integrating empirically supported modalities while tailoring the process to each person. Values: autonomy, transparency, cultural humility, and measurable progress.</p>
+  </section>
+  <section>
+    <h2>Qualifications Snapshot</h2>
+    <ul>
+      <li>Licensure: (Details forthcoming)</li>
+      <li>Education: (Degrees / Institutions)</li>
+      <li>Memberships: (Professional Associations)</li>
+    </ul>
+  </section>
+  <section>
+    <h2>What Comes Next</h2>
+    <p>Upcoming additions include detailed services, conditions treated, FAQs, and regularly updated articles to help visitors make informed decisions about care.</p>
+  </section>
 </Layout>
