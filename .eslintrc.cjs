@@ -11,11 +11,14 @@ module.exports = {
     'plugin:astro/recommended',
     'plugin:import/recommended'
   ],
-  settings: {},
+  settings: {
+    'import/core-modules': ['astro:content']
+  },
   rules: {
   'import/order': ['warn', { 'newlines-between': 'always', groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'], alphabetize: { order: 'asc', caseInsensitive: true }, warnOnUnassignedImports: true }],
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/no-explicit-any': 'error'
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/triple-slash-reference': 'off'
   },
   overrides: [
     {

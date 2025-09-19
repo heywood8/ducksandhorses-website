@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Anna Lopatina',
   author: 'Anna Lopatina',
   url: 'https://heywood8.github.io/ducksandhorses_website', // TODO: Replace with real GitHub Pages URL
-  contactEmail: 'contact@example.com', // Placeholder; replace with forwarding alias
+  contactEmail: 'masachusec1+psychology@gmail.com', // Placeholder; replace with forwarding alias
   form: {
     endpoint: '', // Phase 3: integrate third-party endpoint (Formspree/Basin/etc.)
   },

@@ -442,11 +442,42 @@ Pending (optional expansions):
 - Add JSON-LD for additional service pages (couples, telehealth, modalities) if needed now or in Phase 4.
 
 ### Phase 4 Checklist
-* [ ] Content collection schemas (Zod)
-* [ ] Article list + detail layout
-* [ ] Reading time utility
-* [ ] Tag filter & index page
-* [ ] RSS feed generation
+* [x] Content collection schemas (Zod) – Implemented in `src/content/config.ts` with validation of `title`, `description`, `publishDate`, optional `updatedDate`, `draft`, `tags`, optional `heroImage`, optional `canonical`.
+* [x] Article list + detail layout – `src/pages/blog/index.astro` lists posts (drafts excluded, newest first). Detail pages use dynamic route `src/pages/blog/[slug].astro` + layout `src/layouts/BlogPost.astro` with Article JSON-LD, canonical, reading time, tags.
+* [x] Reading time utility – Implemented in `src/lib/readingTime.ts` (200 wpm baseline) consumed by `BlogPost.astro`.
+* [x] Tag filter & index page – Individual tag archives at `src/pages/blog/tags/[tag].astro` generated via `getStaticPaths`; tag chips link from index & post pages.
+* [x] RSS feed generation – `src/pages/rss.xml.js` exports latest published posts (drafts excluded) for feed readers.
+
+Additional Phase 4 Notes:
+* Draft Handling: Any markdown file with `draft: true` is excluded from builds (lists, tag pages, RSS) and from generated static paths.
+* Structured Data: Each post emits `Article` JSON-LD (author & site-level data can be extended later).
+* Canonicals: Optional frontmatter `canonical` overrides are supported; otherwise canonical derived from slug.
+* Imports & ESLint: Config updated so `astro:content` is treated as a core module (prevents false unresolved import errors). Import ordering rules enforced across new files.
+* Legacy Catch-All Route: Removed obsolete `src/pages/blog/[...slug].astro` (was a neutralized placeholder once `[slug].astro` introduced).
+* Build Output: Blog system increases total static pages (including tag archives, existing site pages, and XML endpoints) to 23.
+
+How To Add A New Post:
+1. Create a new markdown file in `src/content/blog/` (filename determines slug unless overridden by file name pattern, Astro uses file name automatically for slug).
+2. Include frontmatter:
+  ```yaml
+  title: "Meaningful Title"
+  description: "Short meta description (≤160 chars)."
+  publishDate: 2025-02-01
+  updatedDate: 2025-02-01 # optional
+  draft: false
+  tags: [anxiety, skills]
+  heroImage: ../images/optional-hero.jpg # optional
+  canonical: https://example.com/alternative-url # optional
+  ```
+3. Write markdown body content below frontmatter. Headings auto-render; ensure accessible alt text for images.
+4. (Optional) Set `draft: true` to exclude until ready.
+5. Run `npm run dev` or `npm run build` to validate schema & generation.
+
+Planned Future Blog Enhancements (Phase 4+ Backlog):
+* Pagination for index & tag pages once post count grows.
+* Related posts section (simple shared-tag heuristic).
+* Social/open graph image generation (build-time, e.g., `@vercel/og` or Satori) for richer link previews.
+* Lightweight client-side search (precomputed JSON index or Fuse.js) – postponed to keep initial footprint minimal.
 
 ### Phase 5 Checklist
 * [ ] Axe a11y audit pass
@@ -557,11 +588,10 @@ Implemented maintenance/stability adjustments:
 * Resolved Astro frontmatter parsing warnings by adding minimal frontmatter blocks to pages using script/JS.
 * Eliminated lingering `any` usage in structured data component by switching to `unknown` and runtime safety.
 
-All lint checks now pass with only minor ordering warnings (can auto-fix later). Build succeeds producing 16 static pages plus dynamic `sitemap.xml`.
+All lint checks now pass with import ordering standardized. Post Phase 4 build produces 23 static HTML pages (including blog posts & tag archives) plus dynamic assets (`sitemap.xml`, `rss.xml`).
 
 ## 25. Next Immediate Action
-
-Proceed to Phase 4: introduce content collections (Markdown) and article system (schemas, reading time, RSS, tag filtering).
+Phase 4 complete (blog system shipped). Next: Phase 5 (Accessibility & Performance Hardening) – add audits, budgets, and image/performance optimizations.
 
 ---
 
