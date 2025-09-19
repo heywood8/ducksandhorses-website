@@ -1,58 +1,49 @@
 ---
+import '../styles/global.css';
+import Meta from '../components/Meta.astro';
+
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string;
+  noindex?: boolean;
 }
-const { title = 'Psychologist | Home', description = 'Professional psychological services.' } = Astro.props as Props;
+const { title = 'Psychologist | Home', description = 'Professional psychological services.', canonical, noindex = false } = Astro.props as Props;
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Meta title={title} description={description} canonical={canonical} noindex={noindex} />
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <header class="site-header">
-      <nav aria-label="Main navigation">
-        <ul class="nav">
-          <li><a href="/">Home</a></li>
-        </ul>
-      </nav>
+    <header class="site-header" role="banner">
+      <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;">
+        <div class="logo" style="font-weight:600;font-size:var(--font-size-lg);"><a href="/" aria-label="Home">Psychologist</a></div>
+        <nav aria-label="Main navigation">
+          <ul class="nav">
+            <li><a href="/" class={Astro.url.pathname === '/' ? 'active' : ''}>Home</a></li>
+            <li><a href="/about" class={Astro.url.pathname.startsWith('/about') ? 'active' : ''}>About</a></li>
+            <li><a href="/services" class={Astro.url.pathname.startsWith('/services') ? 'active' : ''}>Services</a></li>
+            <li><a href="/conditions" class={Astro.url.pathname.startsWith('/conditions') ? 'active' : ''}>Conditions</a></li>
+            <li><a href="/faq" class={Astro.url.pathname.startsWith('/faq') ? 'active' : ''}>FAQ</a></li>
+            <li><a href="/contact" class={Astro.url.pathname.startsWith('/contact') ? 'active' : ''}>Contact</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
     <main id="main" class="main">
-      <slot />
+      <div class="container">
+        <slot />
+      </div>
     </main>
     <footer class="site-footer">
-      <p>&copy; {new Date().getFullYear()} Psychologist. Not for emergencies. If in crisis call local emergency services.</p>
+      <div class="container">
+        <p>&copy; {new Date().getFullYear()} Psychologist. Not for emergencies. If in crisis call local emergency services.</p>
+        <p class="muted">This site does not provide emergency mental health services. <a href="/emergency">Emergency & Crisis Resources</a></p>
+      </div>
     </footer>
   </body>
 </html>
-<style global>
-  :root {
-    --color-bg: #ffffff;
-    --color-fg: #0f172a;
-    --color-primary: #0f766e;
-    --color-accent: #7c7ba3;
-    --space-1: 4px;
-    --space-2: 8px;
-    --space-3: 12px;
-    --space-4: 16px;
-    --space-5: 24px;
-    --space-6: 32px;
-    --radius-sm: 3px;
-  }
-  * { box-sizing: border-box; }
-  body { font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif; margin:0; background:var(--color-bg); color:var(--color-fg); line-height:1.55; }
-  a { color: var(--color-primary); text-decoration:none; }
-  a:hover, a:focus { text-decoration:underline; }
-  .skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
-  .skip-link:focus { left:8px; top:8px; width:auto; height:auto; background:#fff; padding:var(--space-2) var(--space-3); border:2px solid var(--color-primary); z-index:1000; }
-  .site-header { padding: var(--space-4); border-bottom:1px solid #e2e8f0; }
-  .nav { list-style:none; display:flex; gap:var(--space-4); margin:0; padding:0; }
-  .main { padding: var(--space-5) var(--space-4); max-width: 840px; margin: 0 auto; }
-  .site-footer { padding: var(--space-5) var(--space-4); font-size:0.875rem; background:#f1f5f9; margin-top: var(--space-6); }
-</style>
