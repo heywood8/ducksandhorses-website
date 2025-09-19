@@ -18,7 +18,7 @@ Build a fast, accessible, trustworthy static website for a psychologist to:
 * Enable prospective clients to understand services and decide to reach out.
 * Provide clear, legally appropriate disclaimers (NOT an emergency resource; no therapeutic relationship established via site).
 * Support SEO for local/intended specialties (e.g., anxiety, couples therapy, telehealth).
-* Allow incremental evolution (start simple → add blog/resources → booking/newsletter/internationalization).
+* Allow incremental evolution (blog/resources originally prototyped then removed to simplify; can be reintroduced) → booking/newsletter/internationalization.
 
 Core constraints:
 * Static hosting on GitHub Pages (no server backend).
@@ -60,7 +60,7 @@ Value proposition statement (draft):
   │    ├─ Telehealth (if applicable)
   │    └─ Modalities (CBT, ACT, etc.)
   ├─ Conditions Treated (anxiety, depression, burnout, etc.)
-  ├─ Resources (articles / blog index)
+  ├─ (Removed) Resources / Blog (historical)
   │    ├─ Article detail pages (Markdown)
   ├─ FAQ
   ├─ Schedule (replaces Contact)
@@ -252,7 +252,7 @@ Structured Data (JSON-LD):
 * `@type: Person` (psychologist) on About with `sameAs` (LinkedIn, directories).
 * `@type: Service` for key services.
 * `@type: FAQPage` on FAQ (collapsible semantics + JSON-LD script).
-* `@type: Article` for blog posts.
+* (Removed) `@type: Article` for blog posts (inactive while blog removed).
 
 Performance & Core Web Vitals:
 * Image optimization (Astro image integration, modern formats WebP/AVIF).
@@ -303,7 +303,7 @@ Scope: Integrate third-party form endpoint, anti-spam (honeypot + time-on-page),
 AC: Form submission test success; JSON-LD validates (Google Rich Results test); disclaimers visible.
 SM: Zero console errors; < 200ms TTFB on GitHub Pages (network-dependent).
 
-### Phase 4 – Resources / Blog System
+### Phase 4 – Resources / Blog System (Removed in current build)
 Scope: Markdown content collection setup, article layout, reading time, tag filters, RSS feed, basic search (client-side fuzzy or prebuilt JSON index), `Article` structured data.
 AC: Sample article builds correctly; RSS validates; tags filter subset accurately.
 SM: Article page still ≤ ~100KB HTML + critical assets.
@@ -452,7 +452,7 @@ Pending (optional expansions):
 
 ### Phase 4 Checklist
 * [x] Content collection schemas (Zod) – Implemented in `src/content/config.ts` with validation of `title`, `description`, `publishDate`, optional `updatedDate`, `draft`, `tags`, optional `heroImage`, optional `canonical`.
-* (Removed) Blog implementation (article list, posts, tags, RSS) to streamline scope.
+* (Removed) Blog implementation (article list, posts, tags, RSS) — all routes and feed eliminated; historical notes retained for possible future revival.
 * (Historical) Reading time utility remains available if blog returns.
 
 Additional Phase 4 Notes:
@@ -461,10 +461,10 @@ Additional Phase 4 Notes:
 * Canonicals: Optional frontmatter `canonical` overrides are supported; otherwise canonical derived from slug.
 * Imports & ESLint: Config updated so `astro:content` is treated as a core module (prevents false unresolved import errors). Import ordering rules enforced across new files.
 * Legacy Catch-All Route: Removed obsolete `src/pages/blog/[...slug].astro` (was a neutralized placeholder once `[slug].astro` introduced).
-* Build Output: Blog system increases total static pages (including tag archives, existing site pages, and XML endpoints) to 23.
+* (Historic) Build Output: Blog system previously increased total static pages (including tag archives, existing site pages, and XML endpoints) to 23; current slim build (without blog/faq/rss) produces 17 pages.
 
 How To Add A New Post:
-1. Create a new markdown file in `src/content/blog/` (filename determines slug unless overridden by file name pattern, Astro uses file name automatically for slug).
+1. (Inactive) Create a new markdown file in `src/content/blog/` (collection currently unused — enable if blog reinstated).
 2. Include frontmatter:
   ```yaml
   title: "Meaningful Title"
@@ -486,7 +486,7 @@ Planned Future (If Blog Reintroduced):
 ### Phase 5 Checklist
 * [x] Axe a11y audit script established (`npm run a11y`) – partial coverage with contrast rule temporarily disabled due to jsdom canvas limitations.
 * [x] Lighthouse budget file added (`lighthouse-budget.json`).
-* [x] Lazy-load non-critical blog hero images.
+* (Historic) Lazy-load non-critical blog hero images.
 * [x] Prefetch internal links on hover (respects `prefers-reduced-data`).
 * [ ] Form manual usability & keyboard review (still to validate).
 * [ ] Integrate Lighthouse budget into CI (future enhancement).
@@ -596,7 +596,7 @@ Versioning:
 2. Add design tokens + layout + navigation.
 3. Implement core static pages & placeholder content.
 4. Add form + SEO + structured data.
-5. Add blog system + article templates.
+5. (Historic) Add blog system + article templates (currently removed).
 6. Harden a11y + performance.
 7. Layer optional enhancements (analytics, booking, newsletter, i18n).
 
@@ -643,7 +643,7 @@ Implemented maintenance/stability adjustments:
 * Resolved Astro frontmatter parsing warnings by adding minimal frontmatter blocks to pages using script/JS.
 * Eliminated lingering `any` usage in structured data component by switching to `unknown` and runtime safety.
 
-All lint checks now pass with import ordering standardized. Post Phase 4 build produces 23 static HTML pages (including blog posts & tag archives) plus dynamic assets (`sitemap.xml`, `rss.xml`).
+All lint checks now pass with import ordering standardized. Current build (after removal of blog/faq/rss) produces 17 static HTML pages plus dynamic `sitemap.xml`.
 
 ## 25. Next Immediate Action
 Phase 4 complete (blog system shipped). Next: Phase 5 (Accessibility & Performance Hardening) – add audits, budgets, and image/performance optimizations.
