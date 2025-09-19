@@ -43,6 +43,41 @@ a:hover, a:focus { text-decoration: underline; }
 
 button { font: inherit; }
 
+/* Form elements (shared) */
+input[type="text"], input[type="email"], textarea {
+  background: var(--color-bg-alt);
+  color: var(--color-fg);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+/* Dark theme comfortable form adjustments */
+[data-theme='dark'] input[type="text"],
+[data-theme='dark'] input[type="email"],
+[data-theme='dark'] textarea {
+  background: #1b2534; /* slightly lighter than bg-alt for separation */
+  border: 1px solid #46566e; /* mid border for less glare */
+  color: #f1f5f9;
+  caret-color: var(--color-primary);
+}
+[data-theme='dark'] input[type="text"]:focus,
+[data-theme='dark'] input[type="email"]:focus,
+[data-theme='dark'] textarea:focus {
+  background: #233044; /* subtle elevate */
+  border-color: var(--color-primary);
+}
+[data-theme='dark'] ::placeholder {
+  color: #94a3b8;
+}
+[data-theme='dark'] input[disabled],
+[data-theme='dark'] textarea[disabled] {
+  background: #16202e;
+  opacity: .7;
+}
+
 code, pre { font-family: var(--font-mono); font-size: 0.95em; }
 pre { padding: var(--space-4); background: var(--color-bg-alt); border-radius: var(--radius-md); overflow:auto; }
 
