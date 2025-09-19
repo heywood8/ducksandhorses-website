@@ -8,31 +8,51 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <section aria-labelledby="first-meeting-heading" style="margin-top:var(--space-8);">
     <h2 id="first-meeting-heading">Book a First Meeting</h2>
     <p class="muted" style="font-size:var(--font-size-sm);margin-top:0;">30 minute introductory session.</p>
-    <p><a class="schedule-link" href="https://calendly.com/masachusec1/30min" data-calendly-popup="https://calendly.com/masachusec1/30min">Open first meeting scheduler</a></p>
+  <p><a class="schedule-link" href="https://calendly.com/masachusec1/30min" data-calendly-base="https://calendly.com/masachusec1/30min">Open first meeting scheduler</a></p>
     <noscript><p>JavaScript disabled. Book directly at <a href="https://calendly.com/masachusec1/30min" rel="nofollow noopener">Calendly 30min</a>.</p></noscript>
   </section>
   <section aria-labelledby="regular-session-heading" style="margin-top:var(--space-9);">
     <h2 id="regular-session-heading">Book a Regular Session</h2>
     <p class="muted" style="font-size:var(--font-size-sm);margin-top:0;">Standard follow-up session.</p>
-    <p><a class="schedule-link" href="https://calendly.com/masachusec1/clone" data-calendly-popup="https://calendly.com/masachusec1/clone">Open regular session scheduler</a></p>
+  <p><a class="schedule-link" href="https://calendly.com/masachusec1/clone" data-calendly-base="https://calendly.com/masachusec1/clone">Open regular session scheduler</a></p>
     <noscript><p>JavaScript disabled. Book directly at <a href="https://calendly.com/masachusec1/clone" rel="nofollow noopener">Calendly regular session</a>.</p></noscript>
   </section>
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const paramsBase = 'hide_event_type_details=1&hide_gdpr_banner=1';
+      function themeParams(){
+        // Determine current theme (same logic as layout)
+        const root = document.documentElement;
+        const attr = root.getAttribute('data-theme');
+        let mode = attr || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        // Define palette per mode
+        if(mode === 'dark') {
+          return 'background_color=0f172a&text_color=f1f5f9&primary_color=0F766E';
+        } else {
+          return 'background_color=f1f5f9&text_color=0f172a&primary_color=0F766E';
+        }
+      }
+      function buildUrl(base){
+        return base + (base.includes('?') ? '&' : '?') + paramsBase + '&' + themeParams();
+      }
+      function openPopup(url){
+        if(window.Calendly){
+          window.Calendly.initPopupWidget({ url });
+        } else {
+          window.location.href = url; // fallback
+        }
+      }
       function bind(el){
         el.addEventListener('click', e => {
           e.preventDefault();
-          const url = el.getAttribute('data-calendly-popup');
-          if (url && window.Calendly) {
-            window.Calendly.initPopupWidget({ url });
-          } else {
-            window.location.href = url || el.href;
-          }
+            const base = el.getAttribute('data-calendly-base') || el.href;
+            openPopup(buildUrl(base));
         });
       }
-      document.querySelectorAll('[data-calendly-popup]').forEach(bind);
+      document.querySelectorAll('[data-calendly-base]').forEach(bind);
+      // Optional: re-bind when theme toggle changes if custom event emitted (not implemented here)
     });
   </script>
 </Layout>
