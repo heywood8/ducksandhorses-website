@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://heywood8.github.io/ducksandhorses_website/sitemap.xml

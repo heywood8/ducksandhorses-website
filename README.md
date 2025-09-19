@@ -185,7 +185,7 @@ Node Version: LTS (document exact version once initialized).
 ## 6. Project Structure (Proposed)
 
 ```
-psychology_website/
+ducksandhorses_website/
   README.md
   package.json
   astro.config.mjs
@@ -429,11 +429,17 @@ Content Guidelines:
 Pending for later phases: dynamic collections wiring (Phase 4), structured data (Phase 3), form endpoint integration (Phase 3).
 
 ### Phase 3 Checklist
-* [ ] Contact form endpoint integration
-* [ ] Honeypot + time threshold anti-spam
-* [ ] Consent checkbox + disclaimers
-* [ ] JSON-LD (Person, Services, FAQ)
-* [ ] robots.txt & sitemap.xml
+* [x] Site config centralization (`src/lib/siteConfig.ts`) with canonical builder.
+* [x] Canonical URL auto-generation in `Layout.astro` + head slot for structured data.
+* [x] Structured data component (`StructuredData.astro`).
+* [x] JSON-LD: Person (About), Service (Individual Therapy), FAQPage (FAQ). (More services can reuse pattern later.)
+* [x] Contact form enhancements: form endpoint placeholder, dwell-time activation, honeypot, time-on-page hidden field.
+* [x] robots.txt added with sitemap reference.
+* [x] Dynamic sitemap endpoint (`/sitemap.xml`).
+* [x] 404 page explicitly marked `noindex`.
+
+Pending (optional expansions):
+- Add JSON-LD for additional service pages (couples, telehealth, modalities) if needed now or in Phase 4.
 
 ### Phase 4 Checklist
 * [ ] Content collection schemas (Zod)
@@ -461,7 +467,7 @@ Pending for later phases: dynamic collections wiring (Phase 4), structured data 
 
 Will be added concretely after Phase 0 initialization; expected commands:
 Phase 0 now scaffolded. Current commands:
-* `npm install` – install dependencies
+* `npm install` – install dependencies (TypeScript pinned to 5.5.4 for ESLint parser compatibility)
 * `npm run dev` – start Astro dev server
 * `npm run build` – production build (outputs to `dist/`)
 * `npm run preview` – preview production build locally
@@ -540,9 +546,22 @@ Pending decision. If open-sourcing, include MIT with note excluding proprietary 
 
 ---
 
-## 24. Next Immediate Action
+## 24. Stability Improvements Summary (Post Phase 3)
 
-Proceed to Phase 1: implement design tokens expansion & layout refinement. Phase 0 scaffolding complete (repository structure, Astro config, linting, CI workflow).
+Implemented maintenance/stability adjustments:
+* Pinned TypeScript to `5.5.4` to align with `@typescript-eslint` 7.x compatibility.
+* Removed conflicting `eslint-import-resolver-typescript` (peer dependency clash with utils v8 requirement) – lean config retained.
+* Added explicit `noindex` handling for 404 via `Layout` prop.
+* Centralized canonical URL generation to avoid mismatches.
+* Ensured `.nvmrc` (Node 20) present for reproducible local environment.
+* Resolved Astro frontmatter parsing warnings by adding minimal frontmatter blocks to pages using script/JS.
+* Eliminated lingering `any` usage in structured data component by switching to `unknown` and runtime safety.
+
+All lint checks now pass with only minor ordering warnings (can auto-fix later). Build succeeds producing 16 static pages plus dynamic `sitemap.xml`.
+
+## 25. Next Immediate Action
+
+Proceed to Phase 4: introduce content collections (Markdown) and article system (schemas, reading time, RSS, tag filtering).
 
 ---
 

@@ -1,0 +1,15 @@
+---
+/**
+ * StructuredData component
+ * Renders JSON-LD safely. Accepts an object or array and stringifies it.
+ */
+interface Props { data: unknown }
+const { data } = Astro.props as Props;
+// Stringify without indentation to minimize size
+const json = JSON.stringify(data);
+// Access length to ensure variable considered used by linters
+if (typeof json !== 'string') {
+	throw new Error('JSON-LD serialization failed');
+}
+---
+<script type="application/ld+json">{json}</script>

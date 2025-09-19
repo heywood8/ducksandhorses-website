@@ -1,5 +1,5 @@
 {
-  "name": "psychology-website",
+  "name": "ducksandhorses-website",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -24,6 +24,6 @@
     "eslint-plugin-import": "^2.29.0",
     "prettier": "^3.2.0",
     "prettier-plugin-astro": "^0.14.0",
-    "typescript": "^5.4.0"
+    "typescript": "5.5.4"
   }
 }
