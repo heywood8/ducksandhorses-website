@@ -494,6 +494,25 @@ Planned Future Blog Enhancements (Phase 4+ Backlog):
 * [ ] Lazy-load images & prefetch nav
 * [ ] Form usability manual test
 
+Phase 5 Implementation (in progress):
+* Added automated accessibility audit script: `npm run a11y` (builds then scans `dist/**/*.html` with axe-core for WCAG 2 A/AA violations; fails on any violation).
+* Implemented lazy-loading (`loading="lazy" decoding="async"`) for blog hero images (extend to other images as added).
+* Added lightweight hover prefetch script in `Layout.astro` (skips if user enables `prefers-reduced-data`). Uses `<link rel="prefetch">` for internal routes to reduce perceived latency.
+* Introduced Lighthouse performance budget file `lighthouse-budget.json` with initial conservative thresholds (LCP ≤ 2500ms, FCP ≤ 1800ms, TTI ≤ 4000ms, total transferred ≤ 300KB, JS ≤ 80KB). Not yet wired into CI; will be enforced in a future workflow.
+* Base path adjustments retained for GitHub Pages deployment (all internal links now rely on `import.meta.env.BASE_URL`).
+
+Next Phase 5 Steps:
+1. Expand lazy loading to any future non-critical imagery (services/conditions pages once media added).
+2. Add CI job invoking Lighthouse CI (optional dependency) using `lighthouse-budget.json`.
+3. Manual keyboard & screen reader spot check (document findings in a short `A11Y_REPORT.md`).
+4. Consider extracting link prefetch logic into a separate module for testability.
+
+Usage:
+```
+npm run a11y
+```
+Exit code non-zero => violations summary printed.
+
 ### Phase 6 Checklist (Optional)
 * [ ] Analytics (privacy friendly) toggle
 * [ ] Booking integration page
