@@ -87,6 +87,28 @@ const computedCanonical = canonical || canonicalFor(pathname);
       </div>
     </footer>
     <script is:inline>
+      // Adjust footer positioning: if content shorter than viewport, remove extra scroll by letting footer sit within initial view.
+      (function(){
+        function evaluate(){
+          try {
+            const b = document.body;
+            // A small threshold (2px) to account for sub-pixel rounding / scrollbar presence
+            const fits = b.scrollHeight <= (window.innerHeight + 2);
+            b.classList.toggle('no-scroll-footer', fits);
+          } catch(_) {}
+        }
+        // Run after layout
+        window.addEventListener('load', evaluate);
+        // Re-evaluate on resize and orientation changes
+        window.addEventListener('resize', evaluate);
+        // Mutation observer catches late content (e.g., async widgets) without polling
+        const mo = new MutationObserver((m) => evaluate());
+        mo.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+        // Initial synchronous attempt (in case DOM is already final)
+        evaluate();
+      })();
+    </script>
+    <script is:inline>
       (function(){
         const root = document.documentElement;
         // Mark that JS is enabled to allow CSS to enable transitions only post-hydration

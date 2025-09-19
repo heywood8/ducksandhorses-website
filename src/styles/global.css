@@ -20,6 +20,11 @@ body {
   flex-direction: column;
 }
 
+/* Use dynamic viewport height on mobile browsers that support it to reduce phantom scroll space */
+@supports (height: 100dvh) {
+  body { min-height: 100dvh; }
+}
+
 img, svg, video { max-width: 100%; height: auto; }
 img { display: block; }
 
@@ -126,6 +131,11 @@ hr { border: none; border-top: 1px solid var(--color-border); margin: var(--spac
 .site-header { padding: var(--space-4); border-bottom: 1px solid var(--color-border); background: var(--color-bg); }
 .site-footer { padding: var(--space-6) var(--space-4); font-size: var(--font-size-sm); background: var(--color-bg-alt); margin-top: var(--space-8); }
 
+/* When content is short, remove artificial top margin so footer sits on same viewport without scroll */
+body.no-scroll-footer .site-footer { margin-top: auto; }
+/* Guard: ensure main grows to push footer when enough content exists */
+body .main { flex: 1 0 auto; }
+
 .skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
 .skip-link:focus { left:8px; top:8px; width:auto; height:auto; background:var(--color-bg); padding:var(--space-2) var(--space-3); border:2px solid var(--color-primary); z-index:1000; }
 
@@ -174,3 +184,6 @@ hr { border: none; border-top: 1px solid var(--color-border); margin: var(--spac
 
 /* Prevent transition flash on first paint */
 html:not(.js) .theme-animating { transition: none !important; }
+
+/* Trim excessive bottom spacing inside last container when footer is auto-attached */
+body.no-scroll-footer .main .container > *:last-child { margin-bottom: var(--space-4); }
