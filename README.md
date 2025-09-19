@@ -441,7 +441,7 @@ Pending for later phases: dynamic collections wiring (Phase 4), structured data 
 * [x] Site config centralization (`src/lib/siteConfig.ts`) with canonical builder.
 * [x] Canonical URL auto-generation in `Layout.astro` + head slot for structured data.
 * [x] Structured data component (`StructuredData.astro`).
-* [x] JSON-LD: Person (About me root), Service (Individual Therapy), FAQPage (FAQ). (More services can reuse pattern later.)
+* [x] JSON-LD: Person (About me root), Service (Individual Therapy). (FAQ structured data removed with FAQ page.)
 * [x] Contact form enhancements: form endpoint placeholder, dwell-time activation, honeypot, time-on-page hidden field.
 * [x] robots.txt added with sitemap reference.
 * [x] Dynamic sitemap endpoint (`/sitemap.xml`).
@@ -452,10 +452,8 @@ Pending (optional expansions):
 
 ### Phase 4 Checklist
 * [x] Content collection schemas (Zod) – Implemented in `src/content/config.ts` with validation of `title`, `description`, `publishDate`, optional `updatedDate`, `draft`, `tags`, optional `heroImage`, optional `canonical`.
-* [x] Article list + detail layout – `src/pages/blog/index.astro` lists posts (drafts excluded, newest first). Detail pages use dynamic route `src/pages/blog/[slug].astro` + layout `src/layouts/BlogPost.astro` with Article JSON-LD, canonical, reading time, tags.
-* [x] Reading time utility – Implemented in `src/lib/readingTime.ts` (200 wpm baseline) consumed by `BlogPost.astro`.
-* [x] Tag filter & index page – Individual tag archives at `src/pages/blog/tags/[tag].astro` generated via `getStaticPaths`; tag chips link from index & post pages.
-* [x] RSS feed generation – `src/pages/rss.xml.js` exports latest published posts (drafts excluded) for feed readers.
+* (Removed) Blog implementation (article list, posts, tags, RSS) to streamline scope.
+* (Historical) Reading time utility remains available if blog returns.
 
 Additional Phase 4 Notes:
 * Draft Handling: Any markdown file with `draft: true` is excluded from builds (lists, tag pages, RSS) and from generated static paths.
@@ -482,11 +480,8 @@ How To Add A New Post:
 4. (Optional) Set `draft: true` to exclude until ready.
 5. Run `npm run dev` or `npm run build` to validate schema & generation.
 
-Planned Future Blog Enhancements (Phase 4+ Backlog):
-* Pagination for index & tag pages once post count grows.
-* Related posts section (simple shared-tag heuristic).
-* Social/open graph image generation (build-time, e.g., `@vercel/og` or Satori) for richer link previews.
-* Lightweight client-side search (precomputed JSON index or Fuse.js) – postponed to keep initial footprint minimal.
+Planned Future (If Blog Reintroduced):
+* Pagination, related posts, OG image generation, lightweight search, tag-based related content.
 
 ### Phase 5 Checklist
 * [x] Axe a11y audit script established (`npm run a11y`) – partial coverage with contrast rule temporarily disabled due to jsdom canvas limitations.

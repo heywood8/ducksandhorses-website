@@ -4,8 +4,7 @@ import { siteConfig } from '../lib/siteConfig';
 export async function get() {
   const base = siteConfig.url.replace(/\/$/, '');
   const staticPaths = [
-    '/',
-    '/about/',
+    '/', // About me merged at root
     '/services/',
     '/services/individual/',
     '/services/couples/',
@@ -15,7 +14,6 @@ export async function get() {
     '/conditions/anxiety/',
     '/conditions/depression/',
     '/conditions/burnout/',
-    '/faq/',
     '/contact/',
     '/privacy/',
     '/emergency/'
