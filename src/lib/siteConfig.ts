@@ -11,14 +11,14 @@ export const siteConfig = {
     newsletter: false, // Enable newsletter page & form stub
     booking: false, // Enable booking placeholder page
     darkMode: true, // Dark mode support enabled by default
-    i18n: false // When true, expect localized content folders
+    i18n: false // Only Russian supported now; disable dynamic i18n machinery
   },
   analytics: {
     plausibleDomain: '' // e.g., 'example.com' (no protocol)
   },
   locales: {
-    default: 'en',
-    supported: ['en'] as const
+    default: 'ru',
+    supported: ['ru'] as const
   },
   social: {
     linkedIn: '',
