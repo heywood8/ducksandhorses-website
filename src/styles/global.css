@@ -187,3 +187,58 @@ html:not(.js) .theme-animating { transition: none !important; }
 
 /* Trim excessive bottom spacing inside last container when footer is auto-attached */
 body.no-scroll-footer .main .container > *:last-child { margin-bottom: var(--space-4); }
+
+/* Homepage Enhancements */
+.lead { font-size: 1.125rem; line-height: var(--line-height-relaxed); color: var(--color-fg-mid); max-width: 65ch; }
+.hero { margin-top: var(--space-4); margin-bottom: var(--space-8); }
+.hero-grid { display:grid; gap: var(--space-7); align-items:center; grid-template-columns: 1fr 340px; }
+@media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; } .hero-media { order:-1; justify-self:center; } }
+.hero-actions { display:flex; gap: var(--space-3); flex-wrap:wrap; margin-top: var(--space-4); }
+.hero h1 { margin-top:0; }
+.micro { font-size: var(--font-size-xs); letter-spacing: .5px; text-transform: uppercase; margin-top: var(--space-4); }
+.media-placeholder { width: 100%; aspect-ratio: 4 / 5; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--color-primary-light), #fff); border: 1px solid var(--color-border); box-shadow: var(--shadow-md); opacity:.6; }
+
+/* Buttons (base already partly covered) */
+.btn, .btn-outline, .btn-ghost { font: inherit; line-height:1.2; text-decoration:none; }
+.btn { background: var(--color-primary); color:#fff; padding: .75rem 1.1rem; border-radius: var(--radius-md); font-weight:500; display:inline-flex; align-items:center; gap:.5rem; box-shadow: var(--shadow-sm); transition: background var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base); }
+.btn:hover { background: #115e58; text-decoration:none; transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.btn-outline { padding:.72rem 1.05rem; border:1px solid var(--color-border); border-radius: var(--radius-md); color: var(--color-fg); background: var(--color-bg); transition: background var(--transition-fast), border-color var(--transition-fast); }
+.btn-outline:hover { background: var(--color-bg-alt); text-decoration:none; }
+.btn-ghost { padding:.55rem .9rem; border-radius: var(--radius-md); color: var(--color-primary); background: transparent; }
+.btn-ghost:hover { background: var(--color-primary-light); text-decoration:none; }
+
+/* Process Steps */
+.process-steps { margin-top: var(--space-9); }
+.steps { list-style:none; margin:0; padding:0; display:grid; gap: var(--space-6); grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); counter-reset: step; }
+.steps li { position:relative; padding: var(--space-4) var(--space-4) var(--space-4) var(--space-4); background: var(--color-bg-alt); border:1px solid var(--color-border); border-radius: var(--radius-lg); }
+.steps h3 { font-size: var(--font-size-lg); margin:0 0 var(--space-2); line-height: var(--line-height-snug); }
+.steps p { margin:0; font-size: var(--font-size-sm); line-height: var(--line-height-normal); }
+[data-theme='dark'] .steps li { background: var(--color-surface); border-color: #2a3a50; }
+
+/* FAQ */
+.faq { margin-top: var(--space-9); }
+.faq-items { display:flex; flex-direction:column; gap: var(--space-3); }
+.faq-items details { background: var(--color-bg-alt); border:1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); }
+.faq-items summary { cursor:pointer; font-weight:500; outline:none; list-style:none; }
+.faq-items summary::-webkit-details-marker { display:none; }
+.faq-items details[open] { background: var(--color-bg); }
+.faq-items details[open] summary { margin-bottom: var(--space-2); }
+.faq-items p { margin:0; font-size: var(--font-size-sm); }
+[data-theme='dark'] .faq-items details { background: var(--color-surface); border-color:#2a3a50; }
+[data-theme='dark'] .faq-items details[open] { background:#182230; }
+
+/* CTA final */
+.cta-final { margin-top: var(--space-9); }
+.cta-box { text-align:center; }
+.cta-box p { margin: 0 0 var(--space-3); }
+
+/* List plain utility */
+.list-plain { list-style:none; padding:0; margin:0 0 var(--space-5); }
+.list-plain li { margin:0 0 var(--space-2); }
+
+/* Animation utility */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in { opacity:0; transform: translateY(8px); animation: fadeUp .55s ease forwards; }
+  @keyframes fadeUp { to { opacity:1; transform: translateY(0); } }
+}
