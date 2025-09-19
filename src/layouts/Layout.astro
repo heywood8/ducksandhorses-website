@@ -89,6 +89,8 @@ const computedCanonical = canonical || canonicalFor(pathname);
     <script is:inline>
       (function(){
         const root = document.documentElement;
+        // Mark that JS is enabled to allow CSS to enable transitions only post-hydration
+        root.classList.add('js');
         const pref = localStorage.getItem('theme');
         if (pref === 'dark' || pref === 'light') {
           root.setAttribute('data-theme', pref);
@@ -97,6 +99,8 @@ const computedCanonical = canonical || canonicalFor(pathname);
         if (!btn) return;
         const sun = btn.querySelector('[data-icon-sun]');
         const moon = btn.querySelector('[data-icon-moon]');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let animTimer = null;
         function current(){
           const attr = root.getAttribute('data-theme');
           if (attr) return attr;
@@ -119,9 +123,18 @@ const computedCanonical = canonical || canonicalFor(pathname);
         btn.addEventListener('click', () => {
           const mode = current();
           const next = mode === 'dark' ? 'light' : 'dark';
+          // Add temporary class for smooth cross-fade if user does not prefer reduced motion
+          if (!reducedMotion) {
+            root.classList.add('theme-animating');
+            if (animTimer) clearTimeout(animTimer);
+          }
           root.setAttribute('data-theme', next);
           localStorage.setItem('theme', next);
           render();
+          if (!reducedMotion) {
+            // Remove class after transition ends (slightly longer than CSS duration)
+            animTimer = setTimeout(() => root.classList.remove('theme-animating'), 300);
+          }
         });
         render();
       })();

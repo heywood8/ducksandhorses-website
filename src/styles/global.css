@@ -162,3 +162,15 @@ hr { border: none; border-top: 1px solid var(--color-border); margin: var(--spac
   background: #233044;
   border-color: var(--color-primary);
 }
+
+/* Smooth theme cross-fade (opt-in via JS adds .theme-animating briefly). */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-animating, .theme-animating * {
+    transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease, fill 250ms ease, stroke 250ms ease;
+  }
+  /* Avoid animating large images/videos for performance */
+  .theme-animating img, .theme-animating video { transition: none !important; }
+}
+
+/* Prevent transition flash on first paint */
+html:not(.js) .theme-animating { transition: none !important; }
