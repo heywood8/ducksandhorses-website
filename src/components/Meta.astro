@@ -5,33 +5,37 @@
  * Sets standard meta tags + basic OpenGraph & Twitter card placeholders.
  */
 interface Props {
-  title?: string;
-  siteName?: string;
+  /* The following props remain for meta/OG flexibility, but the <title> tag is now fixed to the clinician name. */
   description?: string;
   canonical?: string;
   noindex?: boolean;
+  /* Optional: pageTitle can override OG meta title if needed, but not the tab title */
+  pageTitle?: string;
 }
 const {
-  title = 'Psychologist | Home',
-  siteName = 'Psychologist',
   description = 'Evidence-based, compassionate psychological care.',
   canonical,
-  noindex = false
+  noindex = false,
+  pageTitle
 } = Astro.props as Props;
 
-const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+// Fixed brand/clinician name for browser tab
+const tabTitle = 'Anna Lopatina';
+// Use pageTitle for OG/social if provided, else fall back to tabTitle
+const ogTitle = pageTitle || tabTitle;
+const siteName = 'Anna Lopatina';
 const url = canonical || Astro.site?.href || '';
 ---
-<title>{fullTitle}</title>
+<title>{tabTitle}</title>
 <meta name="description" content={description} />
 {noindex && <meta name="robots" content="noindex,nofollow" />}
 <link rel="icon" type="image/svg+xml" href={(import.meta.env.BASE_URL.replace(/\/$/, '')) + '/favicon.svg'} />
 {canonical && <link rel="canonical" href={canonical} />}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={siteName} />
-<meta property="og:title" content={fullTitle} />
+<meta property="og:title" content={ogTitle} />
 <meta property="og:description" content={description} />
 {url && <meta property="og:url" content={url} />}
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:title" content={ogTitle} />
 <meta name="twitter:description" content={description} />
