@@ -15,6 +15,9 @@ body {
   background: var(--color-bg);
   color: var(--color-fg);
   text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 img, svg, video { max-width: 100%; height: auto; }
@@ -66,4 +69,6 @@ hr { border: none; border-top: 1px solid var(--color-border); margin: var(--spac
 .skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
 .skip-link:focus { left:8px; top:8px; width:auto; height:auto; background:var(--color-bg); padding:var(--space-2) var(--space-3); border:2px solid var(--color-primary); z-index:1000; }
 
-.main { padding: var(--space-6) 0; }
+.main { padding: var(--space-6) 0; flex: 1 0 auto; }
+
+.site-footer { flex-shrink: 0; }
