@@ -4,7 +4,7 @@ import { siteConfig } from '../lib/siteConfig';
 export async function GET() {
   const base = siteConfig.url.replace(/\/$/, '');
   const staticPaths = [
-    '/', // About me merged at root
+    '/', // Главная (Обо мне)
     '/services/',
     '/services/individual/',
     '/services/couples/',

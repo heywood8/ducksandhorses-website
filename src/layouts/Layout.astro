@@ -11,11 +11,12 @@ interface Props {
   pageTitle?: string; // optional OG/social title distinct from fixed tab title
 }
 const { description = 'Professional psychological services.', canonical, noindex = false, pageTitle } = Astro.props as Props;
-const computedCanonical = canonical || canonicalFor(Astro.url.pathname);
+const pathname = Astro.url.pathname;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const computedCanonical = canonical || canonicalFor(pathname);
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -62,10 +63,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </div>
         <nav aria-label="Main navigation" style="display:flex;align-items:center;gap:var(--space-4);">
           <ul class="nav">
-            <li><a href={base + '/'} class={Astro.url.pathname === base + '/' || Astro.url.pathname === '/' ? 'active' : ''}>About me</a></li>
-            <li><a href={base + '/services'} class={Astro.url.pathname.startsWith(base + '/services') || Astro.url.pathname.startsWith('/services') ? 'active' : ''}>Services</a></li>
-            <li><a href={base + '/conditions'} class={Astro.url.pathname.startsWith(base + '/conditions') || Astro.url.pathname.startsWith('/conditions') ? 'active' : ''}>Conditions</a></li>
-            <li><a href={base + '/schedule'} class={Astro.url.pathname.startsWith(base + '/schedule') || Astro.url.pathname.startsWith('/schedule') ? 'active' : ''}>Schedule</a></li>
+            <li><a href={base + '/'} class={pathname === base + '/' || pathname === '/' ? 'active' : ''}>Обо мне</a></li>
+            <li><a href={base + '/services'} class={pathname.includes('/services') ? 'active' : ''}>Услуги</a></li>
+            <li><a href={base + '/conditions'} class={pathname.includes('/conditions') ? 'active' : ''}>С чем работаю</a></li>
+            <li><a href={base + '/schedule'} class={pathname.includes('/schedule') ? 'active' : ''}>Запись</a></li>
           </ul>
         </nav>
       </div>
@@ -81,8 +82,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </main>
     <footer class="site-footer">
       <div class="container">
-        <p>&copy; {new Date().getFullYear()} Psychologist. Not for emergencies. If in crisis call local emergency services.</p>
-        <p class="muted">This site does not provide emergency mental health services. <a href={base + '/emergency'}>Emergency & Crisis Resources</a> · <a href={base + '/privacy'}>Privacy & Terms</a></p>
+  <p>&copy; {new Date().getFullYear()} Психолог.</p>
+  <p class="muted">Сайт не предоставляет экстренную психиатрическую помощь. <a href={base + '/emergency'}>Экстренные ресурсы</a> · <a href={base + '/privacy'}>Конфиденциальность и условия</a></p>
       </div>
     </footer>
     <script is:inline>

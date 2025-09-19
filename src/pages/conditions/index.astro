@@ -1,15 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="Conditions" description="Conditions and concerns commonly addressed in therapy.">
-  <h1>Conditions Treated</h1>
-  <p>Placeholder overview. Each condition page will later provide education, treatment focus, and reassurance disclaimers.</p>
+<Layout title="Состояния" description="Темы и трудности, с которыми обычно ведётся работа.">
+  <h1>С чем ведётся работа</h1>
+  <p>Краткий обзор. Позже каждая страница будет расширена информацией, фокусами терапии и пояснениями.</p>
   <ul>
       {(() => { const base = import.meta.env.BASE_URL.replace(/\/$/, ''); return (
         <Fragment>
-          <li><a href={`${base}/conditions/anxiety`}>Anxiety Disorders</a></li>
-          <li><a href={`${base}/conditions/depression`}>Depression & Mood</a></li>
-          <li><a href={`${base}/conditions/burnout`}>Burnout / Stress</a></li>
+          <li><a href={`${base}/conditions/anxiety`}>Тревожные расстройства</a></li>
+          <li><a href={`${base}/conditions/depression`}>Депрессивное настроение</a></li>
+          <li><a href={`${base}/conditions/burnout`}>Профессиональное выгорание / стресс</a></li>
         </Fragment> ); })()}
   </ul>
 </Layout>

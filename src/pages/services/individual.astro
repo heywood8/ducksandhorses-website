@@ -5,15 +5,15 @@ import { canonicalFor } from '../../lib/siteConfig';
 const serviceData = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Individual Therapy',
+  name: 'Индивидуальная терапия',
   url: canonicalFor(Astro.url.pathname),
-  description: 'Personalized one-on-one psychotherapy sessions using evidence-based modalities.'
+  description: 'Индивидуальные психотерапевтические сессии с опорой на доказательные подходы.'
 };
 ---
-<Layout title="Individual Therapy" description="Overview of one-on-one individual therapy services.">
+<Layout title="Индивидуальная терапия" description="Описание индивидуальной работы один на один.">
   <Fragment slot="head">
     <StructuredData data={serviceData} />
   </Fragment>
-  <h1>Individual Therapy</h1>
-  <p>Placeholder: Description of individualized therapeutic process, goals, typical session length, and approach (e.g., CBT/ACT integration).</p>
+  <h1>Индивидуальная терапия</h1>
+  <p>Кратко: структура процесса, постановка целей, типичная длительность сессии и интеграция методов (КПТ, ACT и др.). Подробности будут добавлены.</p>
 </Layout>
