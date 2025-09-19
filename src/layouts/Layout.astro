@@ -1,6 +1,7 @@
 ---
-import '../styles/global.css';
 import Meta from '../components/Meta.astro';
+import { canonicalFor } from '../lib/siteConfig';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -9,19 +10,21 @@ interface Props {
   noindex?: boolean;
 }
 const { title = 'Psychologist | Home', description = 'Professional psychological services.', canonical, noindex = false } = Astro.props as Props;
+const computedCanonical = canonical || canonicalFor(Astro.url.pathname);
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <Meta title={title} description={description} canonical={canonical} noindex={noindex} />
+  <Meta title={title} description={description} canonical={computedCanonical} noindex={noindex} />
+  <slot name="head" />
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
     <header class="site-header" role="banner">
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;">
-        <div class="logo" style="font-weight:600;font-size:var(--font-size-lg);"><a href="/" aria-label="Home">Psychologist</a></div>
+        <div class="logo" style="font-weight:600;font-size:var(--font-size-lg);"><a href="/" aria-label="Home">Ducks and horses</a></div>
         <nav aria-label="Main navigation">
           <ul class="nav">
             <li><a href="/" class={Astro.url.pathname === '/' ? 'active' : ''}>Home</a></li>

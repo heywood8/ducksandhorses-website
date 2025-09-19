@@ -1,7 +1,24 @@
 ---
+import StructuredData from '../../components/StructuredData.astro';
 import Layout from '../../layouts/Layout.astro';
+import { siteConfig, canonicalFor } from '../../lib/siteConfig';
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: siteConfig.author,
+  url: canonicalFor(Astro.url.pathname),
+  jobTitle: 'Psychologist',
+  description: 'Evidence-based, compassionate psychological care.',
+  sameAs: [
+    siteConfig.social.linkedIn || undefined,
+    siteConfig.social.directoryProfile || undefined
+  ].filter(Boolean)
+};
 ---
 <Layout title="About" description="About the practice: approach, philosophy, and qualifications.">
+  <Fragment slot="head">
+    <StructuredData data={person} />
+  </Fragment>
   <h1>About This Practice</h1>
   <p>Placeholder content. This page will outline therapeutic philosophy, evidence-based modalities, and professional stance. Future sections: Philosophy, Qualifications, Ethics.</p>
   <section>
