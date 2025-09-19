@@ -12,7 +12,7 @@ Lean, privacy‑aware informational site with scheduling.
 
 ## Overview
 
-This repository hosts a minimal, fast Astro site for a solo psychologist. Current live scope focuses on clear information (About, Services, Conditions), disclaimers, and frictionless scheduling (Calendly popups). Legacy experimental features (blog, FAQ, newsletter, booking placeholder form, RSS) were removed to reduce maintenance overhead. They can be reintroduced later without architectural churn.
+This repository hosts a minimal, fast Astro site for a solo psychologist. Current live scope focuses on clear information (About, Services, Conditions), disclaimers, and frictionless scheduling (Calendly popups via the Schedule page). Legacy experimental features (blog, FAQ, newsletter, booking placeholder form/page, RSS) were removed to reduce maintenance overhead. They can be reintroduced later without architectural churn.
 
 Goals:
 * Establish credibility & scope of practice.
@@ -529,18 +529,18 @@ Non-zero exit => fix reported violations (except contrast until tooling improved
 ### Phase 6 Checklist (Optional)
 * [x] Analytics feature flag + Plausible injection component (`src/components/Analytics.astro`).
 * [x] Dark mode design tokens + toggle (localStorage + `prefers-color-scheme` fallback).
-* [x] Booking placeholder page (`/booking`) with feature flag gating.
+* [x] Schedule page with Calendly popup integration (replaces earlier `/booking` placeholder which was fully removed).
 * [x] Newsletter placeholder page (`/newsletter`) with gated form stub.
 * [x] i18n scaffold (`src/lib/i18n.ts`) with simple key lookup + locale config in `siteConfig`.
 * [ ] Implement newsletter backend (deferred – requires external service selection).
-* [ ] Implement booking provider embed (Cal.com/Calendly) once provider chosen.
+* [x] Implement Calendly embed (popup triggers) on the Schedule page.
 
 Feature Flags (in `src/lib/siteConfig.ts`):
 ```
 features: {
   analytics: false,
   newsletter: false,
-  booking: false,
+  booking: false, // previously gated a placeholder page; real scheduling now handled by Calendly links/popups
   darkMode: true,
   i18n: false
 }
