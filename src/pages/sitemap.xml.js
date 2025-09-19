@@ -1,7 +1,7 @@
 import { siteConfig } from '../lib/siteConfig';
 
 // Basic sitemap (Phase 3). Later we can auto-discover content collections.
-export async function get() {
+export async function GET() {
   const base = siteConfig.url.replace(/\/$/, '');
   const staticPaths = [
     '/', // About me merged at root
