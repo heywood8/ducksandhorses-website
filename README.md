@@ -39,7 +39,7 @@ Alternative fallback (if simplifying further): Vite + vanilla TS + static HTML t
 | Prospective individual client | Am I a good fit? Can she help with my issue? Is she qualified? | Clear services, conditions treated, approach, credentials, tone conveying empathy & expertise. |
 | Couples seeking therapy | Neutral, safe, nonjudgmental guidance? | Dedicated couples section with process overview & boundaries. |
 | Referring professional | Qualifications, modalities, licensure scope. | Credentials page with license numbers, modalities, continuing education. |
-| Returning visitor | Quick contact or resource lookup. | Prominent Contact & Resources navigation. |
+| Returning visitor | Quick scheduling or resource lookup. | Prominent Schedule & Resources navigation. |
 | Search engine crawler | Structured semantic signals. | JSON-LD, clear headings, optimized metadata, performance. |
 
 Value proposition statement (draft):
@@ -63,7 +63,7 @@ Value proposition statement (draft):
   ├─ Resources (articles / blog index)
   │    ├─ Article detail pages (Markdown)
   ├─ FAQ
-  ├─ Contact
+  ├─ Schedule (replaces Contact)
   │    ├─ Secure inquiry form (minimal fields)
   │    └─ Location / Timezone (if telehealth only, clarify)
   ├─ Privacy & Terms
@@ -74,7 +74,7 @@ Value proposition statement (draft):
 *Testimonials must comply with local regulations—some jurisdictions restrict psych professional testimonials; treat as optional configurable feature.
 
 Navigation Model:
-* Primary nav: About me · Services · Conditions · Resources · FAQ · Contact
+* Primary nav: About me · Services · Conditions · Resources · FAQ · Schedule
 * Utility footer: Privacy · Terms · Emergency · (Optional) Newsletter Signup · Social/Professional profiles (LinkedIn, PsychologyToday, etc.)
 * Persistent prominent crisis disclaimer (banner or footer microtext).
 
@@ -125,7 +125,7 @@ slug: session-length
 order: 3
 ```
 
-Global site config (JSON / TS export): logo paths, contact emails (separate inbound alias), disclaimers, analytics toggle.
+Global site config (JSON / TS export): logo paths, scheduling link aliases (if needed), disclaimers, analytics toggle.
 
 ---
 
@@ -265,7 +265,7 @@ Keyword Strategy (ethical): Focus on accurate descriptions, avoid over-optimizat
 
 ## 9. Privacy, Ethics, Legal & Compliance
 
-Key disclaimers (display on Contact + footer link):
+Key disclaimers (display on Schedule + footer link):
 * Not for emergencies: "If you are experiencing a crisis or emergency, call your local emergency number or a crisis hotline (e.g., 988 in the U.S.)."
 * No therapist-client relationship established by viewing site.
 * Do not submit detailed personal/medical information via the form.
@@ -294,11 +294,11 @@ AC: Lighthouse Performance ≥ 95 (local), A11y ≥ 100 on scaffold pages.
 SM: CSS bundle < 20KB initial (gzipped).
 
 ### Phase 2 – Core Pages (Content Drafts)
-Scope: About, Services (index + detail), Conditions index (with per-condition pages), FAQ, Privacy & Terms, Emergency Notice, Contact (static form w/ placeholder action), 404 page.
+Scope: About, Services (index + detail), Conditions index (with per-condition pages), FAQ, Privacy & Terms, Emergency Notice, Schedule (embedded booking widgets), 404 page.
 AC: All pages render with placeholder/draft content; navigation active states work; no broken links.
 SM: Build size stable; no a11y violations in automated scan.
 
-### Phase 3 – Contact Form & SEO Enhancements
+### Phase 3 – Scheduling & SEO Enhancements (Contact replaced)
 Scope: Integrate third-party form endpoint, anti-spam (honeypot + time-on-page), disclaimers + required consent checkbox, structured data injection (Person, Service, FAQ), sitemap + robots, canonical tags.
 AC: Form submission test success; JSON-LD validates (Google Rich Results test); disclaimers visible.
 SM: Zero console errors; < 200ms TTFB on GitHub Pages (network-dependent).
@@ -405,7 +405,7 @@ Flow:
 
 Content Guidelines:
 * Plain-language explanations; avoid diagnosis language.
-* Each article includes: summary paragraph, scannable subheadings, internal links (2–4), external authoritative sources (0–2, optional), clear call-to-action (CTA) to Contact.
+* Each article includes: summary paragraph, scannable subheadings, internal links (2–4), external authoritative sources (0–2, optional), clear call-to-action (CTA) to Schedule.
 * Keep reading level around grade 8–10 (optionally enforce with a readability script).
 
 ---
@@ -428,10 +428,10 @@ Content Guidelines:
 * [x] Accessibility baseline (skip link) – Skip link present, focus-visible styles added, semantic landmarks in layout.
 
 ### Phase 2 Checklist
-* [x] Pages scaffolded: Home/About (now merged as About me), Services (+ individual, couples, telehealth, modalities), Conditions (+ anxiety, depression, burnout), FAQ, Contact, Privacy & Terms, Emergency, 404.
+* [x] Pages scaffolded: Home/About (now merged as About me), Services (+ individual, couples, telehealth, modalities), Conditions (+ anxiety, depression, burnout), FAQ, (Contact later replaced by Schedule), Privacy & Terms, Emergency, 404.
 * [x] Placeholder markdown directories & sample files (`src/content/services`, `src/content/conditions`, `src/content/faq`).
 * [x] Navigation active states auto-applied via pathname logic (already from Phase 1 layout refactor).
-* [x] Contact form placeholder with accessibility semantics, honeypot & consent checkbox (submit disabled pending Phase 3 integration).
+* [x] (Historic) Contact form placeholder with accessibility semantics, honeypot & consent checkbox (removed when replaced by Schedule with Calendly embeds).
 * [x] Footer now includes Privacy & Terms and Emergency link.
 * [x] 404 page implemented with helpful links.
 
@@ -442,7 +442,7 @@ Pending for later phases: dynamic collections wiring (Phase 4), structured data 
 * [x] Canonical URL auto-generation in `Layout.astro` + head slot for structured data.
 * [x] Structured data component (`StructuredData.astro`).
 * [x] JSON-LD: Person (About me root), Service (Individual Therapy). (FAQ structured data removed with FAQ page.)
-* [x] Contact form enhancements: form endpoint placeholder, dwell-time activation, honeypot, time-on-page hidden field.
+* [x] (Historic) Contact form enhancements: form endpoint placeholder, dwell-time activation, honeypot, time-on-page hidden field (superseded by direct scheduling widgets).
 * [x] robots.txt added with sitemap reference.
 * [x] Dynamic sitemap endpoint (`/sitemap.xml`).
 * [x] 404 page explicitly marked `noindex`.
@@ -571,7 +571,7 @@ Optional future scripts:
 ## 18. Metrics & Continuous Improvement
 
 Track (post-launch):
-* Page views → contact form conversion.
+* Page views → schedule widget engagement (open / booking intent proxy).
 * Top exit pages → refine CTAs.
 * Average article scroll depth.
 * Performance trend (Lighthouse CI history).

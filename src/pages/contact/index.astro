@@ -1,53 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { siteConfig } from '../../lib/siteConfig';
-const formEndpoint = siteConfig.form.endpoint || '#';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+Astro.response.headers.set('Location', base + '/schedule/');
 ---
-<Layout title="Contact" description="Get in touch for general inquiries. Not for emergencies.">
-  <h1>Contact</h1>
-  <p>Please use this placeholder form for general inquiries only. Do not include private or sensitive personal health information.</p>
-  <form method="post" action={formEndpoint} novalidate aria-describedby="contact-disclaimer">
-    <div style="max-width:560px;">
-      <div style="margin-bottom:var(--space-5);">
-        <label for="name">Name (optional)</label><br />
-        <input id="name" name="name" type="text" style="width:100%;padding:var(--space-3);border:1px solid var(--color-border);border-radius:var(--radius-sm);" />
-      </div>
-      <div style="margin-bottom:var(--space-5);">
-        <label for="email">Email <span class="visually-hidden">(required)</span></label><br />
-        <input id="email" name="email" type="email" required aria-required="true" style="width:100%;padding:var(--space-3);border:1px solid var(--color-border);border-radius:var(--radius-sm);" />
-      </div>
-      <div style="margin-bottom:var(--space-5);">
-        <label for="message">General Message</label><br />
-        <textarea id="message" name="message" rows="5" style="width:100%;padding:var(--space-3);border:1px solid var(--color-border);border-radius:var(--radius-sm);"></textarea>
-      </div>
-      <div style="margin-bottom:var(--space-5);">
-        <input type="checkbox" id="ack" name="ack" required aria-required="true" /> <label for="ack">I understand this form is not for emergencies.</label>
-      </div>
-      <div class="visually-hidden">
-        <label for="company">Leave this field blank</label>
-        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
-      </div>
-      <input type="hidden" name="timeOnPage" id="timeOnPage" value="0" />
-  {(() => { const base = import.meta.env.BASE_URL.replace(/\/$/, ''); return <p id="contact-disclaimer" class="muted" style="font-size:var(--font-size-sm);">If you are experiencing a crisis, do not use this form—visit the <a href={base + '/emergency'}>Emergency</a> page for resources.</p>; })()}
-      <button id="contactSubmit" type="submit" disabled style="background:var(--color-primary);color:#fff;padding:var(--space-3) var(--space-5);border:none;border-radius:var(--radius-sm);font-size:var(--font-size-md);cursor:not-allowed;opacity:.6;">Submit (Disabled Placeholder)</button>
-    </div>
-  </form>
-  <script>
-    // Enable submit after minimal dwell time (anti-spam heuristic)
-    const enableAfter = 4000; // 4 seconds
-    const startTime = Date.now();
-    window.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('contactSubmit');
-      const timeField = document.getElementById('timeOnPage');
-      setTimeout(() => {
-        if(btn){
-          btn.textContent = 'Submit';
-          btn.disabled = false;
-          btn.style.cursor = 'pointer';
-          btn.style.opacity = '1';
-        }
-      }, enableAfter);
-      setInterval(() => { if(timeField) timeField.value = String(Math.floor((Date.now() - startTime)/1000)); }, 1000);
-    });
-  </script>
+<Layout title="Redirecting" noindex={true} canonical={base + '/schedule/'}>
+  <meta http-equiv="refresh" content={`0; url='${base}/schedule/'`} />
+  <p>If you are not redirected automatically, <a href={base + '/schedule/'}>go to the Schedule page</a>.</p>
+  <script>window.location.replace(`${base}/schedule/`)</script>
 </Layout>

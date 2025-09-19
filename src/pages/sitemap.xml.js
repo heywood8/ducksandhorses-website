@@ -14,7 +14,7 @@ export async function get() {
     '/conditions/anxiety/',
     '/conditions/depression/',
     '/conditions/burnout/',
-    '/contact/',
+  '/schedule/',
     '/privacy/',
     '/emergency/'
   ];
