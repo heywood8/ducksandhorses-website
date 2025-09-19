@@ -97,6 +97,31 @@ hr { border: none; border-top: 1px solid var(--color-border); margin: var(--spac
 .nav a { padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); }
 .nav a.active { background: var(--color-primary-light); }
 
+/* Mobile nav adjustments: keep items on single line, allow horizontal scroll instead of wrapping */
+@media (max-width: 640px) {
+  .site-header { padding: var(--space-3) var(--space-3) calc(var(--space-3) + 4px); }
+  .nav { 
+    gap: var(--space-2);
+    font-size: 0.875rem; /* slightly smaller to fit */
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { padding: 4px 10px; white-space: nowrap; }
+  /* Provide right padding so last item not obscured by theme toggle absolute button */
+  .site-header .container { gap: var(--space-4); }
+  .site-header nav { max-width: 100%; flex: 1 1 auto; }
+  .logo span { display: none; } /* hide text to reclaim space, keep avatar image */
+  .logo a { gap: 0; }
+}
+
+/* Very narrow fallback (e.g., 320px) – reduce padding further */
+@media (max-width: 380px) {
+  .nav a { padding: 4px 8px; }
+}
+
 /* Header/Footer */
 .site-header { padding: var(--space-4); border-bottom: 1px solid var(--color-border); background: var(--color-bg); }
 .site-footer { padding: var(--space-6) var(--space-4); font-size: var(--font-size-sm); background: var(--color-bg-alt); margin-top: var(--space-8); }
