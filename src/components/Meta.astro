@@ -1,0 +1,37 @@
+---
+/**
+ * Meta component (Phase 1)
+ * Props: title (string), description (string), canonical (string optional), noindex (boolean optional)
+ * Sets standard meta tags + basic OpenGraph & Twitter card placeholders.
+ */
+interface Props {
+  title?: string;
+  siteName?: string;
+  description?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+const {
+  title = 'Psychologist | Home',
+  siteName = 'Psychologist',
+  description = 'Evidence-based, compassionate psychological care.',
+  canonical,
+  noindex = false
+} = Astro.props as Props;
+
+const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+const url = canonical || Astro.site?.href || '';
+---
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+{canonical && <link rel="canonical" href={canonical} />}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+{url && <meta property="og:url" content={url} />}
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />

@@ -412,11 +412,11 @@ Content Guidelines:
 * [ ] Commit baseline
 
 ### Phase 1 Checklist
-* [ ] Add design tokens (CSS variables)
-* [ ] Global layout & navigation
-* [ ] Footer w/ year + disclaimer link
-* [ ] Meta component (title/description props)
-* [ ] Accessibility baseline (skip link)
+* [x] Add design tokens (CSS variables) – Implemented in `src/styles/tokens.css` with colors, spacing, typography scale, shadows, radii.
+* [x] Global layout & navigation – `src/layouts/Layout.astro` now imports global styles, provides nav skeleton with active states.
+* [x] Footer w/ year + disclaimer link – Added crisis disclaimer link to `/emergency` (page to be created Phase 2).
+* [x] Meta component (title/description props) – Implemented as `src/components/Meta.astro` including basic OG/Twitter tags.
+* [x] Accessibility baseline (skip link) – Skip link present, focus-visible styles added, semantic landmarks in layout.
 
 ### Phase 2 Checklist
 * [ ] Pages: About / Services / Conditions / FAQ / Contact / Privacy / Emergency / 404
