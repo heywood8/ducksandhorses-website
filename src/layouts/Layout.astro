@@ -61,17 +61,13 @@ const computedCanonical = canonical || canonicalFor(pathname);
       <span>Анна Лопатина | Психолог</span>
     </a>
   </div>
-        <nav aria-label="Main navigation" class="nav-carousel">
-          <button class="nav-scroll prev" aria-label="Предыдущие" disabled>&#10094;</button>
-          <div class="nav-viewport">
-            <ul class="nav nav-track">
-              <li><a href={base + '/'} class={pathname === base + '/' || pathname === '/' ? 'active' : ''}>Обо мне</a></li>
-              <li><a href={base + '/services'} class={pathname.includes('/services') ? 'active' : ''}>Услуги</a></li>
-              <li><a href={base + '/conditions'} class={pathname.includes('/conditions') ? 'active' : ''}>С чем работаю</a></li>
-              <li><a href={base + '/schedule'} class={pathname.includes('/schedule') ? 'active' : ''}>Запись</a></li>
-            </ul>
-          </div>
-          <button class="nav-scroll next" aria-label="Следующие">&#10095;</button>
+        <nav aria-label="Main navigation" style="display:flex;align-items:center;gap:var(--space-4);">
+          <ul class="nav">
+            <li><a href={base + '/'} class={pathname === base + '/' || pathname === '/' ? 'active' : ''}>Обо мне</a></li>
+            <li><a href={base + '/services'} class={pathname.includes('/services') ? 'active' : ''}>Услуги</a></li>
+            <li><a href={base + '/conditions'} class={pathname.includes('/conditions') ? 'active' : ''}>С чем работаю</a></li>
+            <li><a href={base + '/schedule'} class={pathname.includes('/schedule') ? 'active' : ''}>Запись</a></li>
+          </ul>
         </nav>
       </div>
       <button type="button" id="theme-toggle" aria-label="Toggle dark mode" class="theme-icon-btn" style="position:absolute;top:8px;right:8px;">
@@ -92,52 +88,42 @@ const computedCanonical = canonical || canonicalFor(pathname);
     </footer>
     <script is:inline>
       (function(){
-        // Theme toggle logic
         const root = document.documentElement;
         const pref = localStorage.getItem('theme');
-        if (pref === 'dark' || pref === 'light') root.setAttribute('data-theme', pref);
+        if (pref === 'dark' || pref === 'light') {
+          root.setAttribute('data-theme', pref);
+        }
         const btn = document.getElementById('theme-toggle');
-        const sun = btn?.querySelector('[data-icon-sun]');
-        const moon = btn?.querySelector('[data-icon-moon]');
+        if (!btn) return;
+        const sun = btn.querySelector('[data-icon-sun]');
+        const moon = btn.querySelector('[data-icon-moon]');
         function current(){
           const attr = root.getAttribute('data-theme');
-            if (attr) return attr;
-            return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          if (attr) return attr;
+          return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
         function render(){
           const mode = current();
           if (sun && moon) {
-            if (mode === 'dark') { sun.style.display='none'; moon.style.display=''; btn?.setAttribute('aria-label','Switch to light mode'); }
-            else { sun.style.display=''; moon.style.display='none'; btn?.setAttribute('aria-label','Switch to dark mode'); }
+            if (mode === 'dark') {
+              sun.style.display = 'none';
+              moon.style.display = '';
+              btn.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+              sun.style.display = '';
+              moon.style.display = 'none';
+              btn.setAttribute('aria-label', 'Switch to dark mode');
+            }
           }
         }
-        btn?.addEventListener('click', () => {
-          const next = current() === 'dark' ? 'light' : 'dark';
+        btn.addEventListener('click', () => {
+          const mode = current();
+          const next = mode === 'dark' ? 'light' : 'dark';
           root.setAttribute('data-theme', next);
           localStorage.setItem('theme', next);
           render();
         });
         render();
-
-        // Nav carousel logic
-        const viewport = document.querySelector('.nav-viewport');
-        const track = document.querySelector('.nav-track');
-        const prev = document.querySelector('.nav-scroll.prev');
-        const nextBtn = document.querySelector('.nav-scroll.next');
-        if (viewport && track && prev && nextBtn) {
-          const amount = () => Math.min(200, viewport.clientWidth * 0.8);
-          function updateButtons(){
-            const maxScroll = track.scrollWidth - viewport.clientWidth;
-            const sc = viewport.scrollLeft;
-            prev.disabled = sc <= 0 + 2; // allow tiny tolerance
-            nextBtn.disabled = sc >= maxScroll - 2;
-          }
-          prev.addEventListener('click', () => { viewport.scrollBy({left: -amount(), behavior:'smooth'}); });
-          nextBtn.addEventListener('click', () => { viewport.scrollBy({left: amount(), behavior:'smooth'}); });
-          viewport.addEventListener('scroll', updateButtons, {passive:true});
-          window.addEventListener('resize', updateButtons);
-          updateButtons();
-        }
       })();
     </script>
   </body>
