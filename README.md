@@ -489,36 +489,68 @@ Planned Future Blog Enhancements (Phase 4+ Backlog):
 * Lightweight client-side search (precomputed JSON index or Fuse.js) – postponed to keep initial footprint minimal.
 
 ### Phase 5 Checklist
-* [ ] Axe a11y audit pass
-* [ ] Lighthouse budget integration
-* [ ] Lazy-load images & prefetch nav
-* [ ] Form usability manual test
+* [x] Axe a11y audit script established (`npm run a11y`) – partial coverage with contrast rule temporarily disabled due to jsdom canvas limitations.
+* [x] Lighthouse budget file added (`lighthouse-budget.json`).
+* [x] Lazy-load non-critical blog hero images.
+* [x] Prefetch internal links on hover (respects `prefers-reduced-data`).
+* [ ] Form manual usability & keyboard review (still to validate).
+* [ ] Integrate Lighthouse budget into CI (future enhancement).
 
-Phase 5 Implementation (in progress):
-* Added automated accessibility audit script: `npm run a11y` (builds then scans `dist/**/*.html` with axe-core for WCAG 2 A/AA violations; fails on any violation).
-* Implemented lazy-loading (`loading="lazy" decoding="async"`) for blog hero images (extend to other images as added).
-* Added lightweight hover prefetch script in `Layout.astro` (skips if user enables `prefers-reduced-data`). Uses `<link rel="prefetch">` for internal routes to reduce perceived latency.
-* Introduced Lighthouse performance budget file `lighthouse-budget.json` with initial conservative thresholds (LCP ≤ 2500ms, FCP ≤ 1800ms, TTI ≤ 4000ms, total transferred ≤ 300KB, JS ≤ 80KB). Not yet wired into CI; will be enforced in a future workflow.
-* Base path adjustments retained for GitHub Pages deployment (all internal links now rely on `import.meta.env.BASE_URL`).
+Implementation Notes:
+* Accessibility Script: Uses jsdom + axe-core. Color contrast rule disabled pending reliable emulation; other violations cause non-zero exit.
+* Performance Budget: Enforced manually for now; add a `perf` workflow to automate.
+* Prefetch Strategy: Injected once in `Layout.astro`; skips modified/ctrl key events to avoid interfering with standard behaviors.
+* Base Path: All internal links use `import.meta.env.BASE_URL` to ensure correctness under GitHub Pages project subpath.
 
-Next Phase 5 Steps:
-1. Expand lazy loading to any future non-critical imagery (services/conditions pages once media added).
-2. Add CI job invoking Lighthouse CI (optional dependency) using `lighthouse-budget.json`.
-3. Manual keyboard & screen reader spot check (document findings in a short `A11Y_REPORT.md`).
-4. Consider extracting link prefetch logic into a separate module for testability.
-
-Usage:
+Run A11y:
 ```
 npm run a11y
 ```
-Exit code non-zero => violations summary printed.
+Non-zero exit => fix reported violations (except contrast until tooling improved).
 
 ### Phase 6 Checklist (Optional)
-* [ ] Analytics (privacy friendly) toggle
-* [ ] Booking integration page
-* [ ] Newsletter signup (double opt-in)
-* [ ] Dark mode toggle
-* [ ] i18n scaffolding
+* [x] Analytics feature flag + Plausible injection component (`src/components/Analytics.astro`).
+* [x] Dark mode design tokens + toggle (localStorage + `prefers-color-scheme` fallback).
+* [x] Booking placeholder page (`/booking`) with feature flag gating.
+* [x] Newsletter placeholder page (`/newsletter`) with gated form stub.
+* [x] i18n scaffold (`src/lib/i18n.ts`) with simple key lookup + locale config in `siteConfig`.
+* [ ] Implement newsletter backend (deferred – requires external service selection).
+* [ ] Implement booking provider embed (Cal.com/Calendly) once provider chosen.
+
+Feature Flags (in `src/lib/siteConfig.ts`):
+```
+features: {
+  analytics: false,
+  newsletter: false,
+  booking: false,
+  darkMode: true,
+  i18n: false
+}
+```
+Toggle a feature by setting the corresponding boolean. Components/pages check these flags at build/runtime to conditionally render.
+
+Analytics:
+* Set `features.analytics = true` and populate `analytics: { plausibleDomain: 'example.com' }`.
+* Script loads only when both the flag is true and a domain is present.
+
+Dark Mode:
+* CSS tokens define light defaults; dark overrides via `@media (prefers-color-scheme: dark)` and manual `[data-theme]` attributes.
+* Toggle button stores preference in `localStorage('theme')` and applies attribute to `<html>`.
+
+Internationalization (Scaffold):
+* `siteConfig.locales` defines `supported` + `default`.
+* `t(key, locale?)` returns translation or key fallback.
+* Extend by adding additional locale entries to the `messages` map in `i18n.ts` and wiring locale selection UI when `features.i18n` is enabled.
+
+Newsletter & Booking:
+* Pages exist but are placeholders while flags are off.
+* When selecting a provider, embed code or API integration can be added inside conditional blocks where the flags are checked.
+
+Next Steps (Phase 6):
+1. Decide on providers (newsletter + booking) and update placeholders.
+2. Enable i18n flag and add additional locale dictionaries (e.g., `es`, `fr`).
+3. Add documentation on privacy notice if analytics enabled.
+4. Add tests for `t()` utility and feature flag rendering logic (optional quality improvement).
 
 ---
 
