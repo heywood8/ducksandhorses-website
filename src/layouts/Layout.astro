@@ -11,6 +11,7 @@ interface Props {
 }
 const { title = 'Psychologist | Home', description = 'Professional psychological services.', canonical, noindex = false } = Astro.props as Props;
 const computedCanonical = canonical || canonicalFor(Astro.url.pathname);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -24,16 +25,16 @@ const computedCanonical = canonical || canonicalFor(Astro.url.pathname);
     <a href="#main" class="skip-link">Skip to content</a>
     <header class="site-header" role="banner">
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;">
-        <div class="logo" style="font-weight:600;font-size:var(--font-size-lg);"><a href="/" aria-label="Home">Ducks and horses</a></div>
+  <div class="logo" style="font-weight:600;font-size:var(--font-size-lg);"><a href={base + '/'} aria-label="Home">Ducks and horses</a></div>
         <nav aria-label="Main navigation">
           <ul class="nav">
-            <li><a href="/" class={Astro.url.pathname === '/' ? 'active' : ''}>Home</a></li>
-            <li><a href="/about" class={Astro.url.pathname.startsWith('/about') ? 'active' : ''}>About</a></li>
-            <li><a href="/services" class={Astro.url.pathname.startsWith('/services') ? 'active' : ''}>Services</a></li>
-            <li><a href="/conditions" class={Astro.url.pathname.startsWith('/conditions') ? 'active' : ''}>Conditions</a></li>
-            <li><a href="/blog" class={Astro.url.pathname.startsWith('/blog') ? 'active' : ''}>Blog</a></li>
-            <li><a href="/faq" class={Astro.url.pathname.startsWith('/faq') ? 'active' : ''}>FAQ</a></li>
-            <li><a href="/contact" class={Astro.url.pathname.startsWith('/contact') ? 'active' : ''}>Contact</a></li>
+            <li><a href={base + '/'} class={Astro.url.pathname === base + '/' || Astro.url.pathname === '/' ? 'active' : ''}>Home</a></li>
+            <li><a href={base + '/about'} class={Astro.url.pathname.startsWith(base + '/about') || Astro.url.pathname.startsWith('/about') ? 'active' : ''}>About</a></li>
+            <li><a href={base + '/services'} class={Astro.url.pathname.startsWith(base + '/services') || Astro.url.pathname.startsWith('/services') ? 'active' : ''}>Services</a></li>
+            <li><a href={base + '/conditions'} class={Astro.url.pathname.startsWith(base + '/conditions') || Astro.url.pathname.startsWith('/conditions') ? 'active' : ''}>Conditions</a></li>
+            <li><a href={base + '/blog'} class={Astro.url.pathname.startsWith(base + '/blog') || Astro.url.pathname.startsWith('/blog') ? 'active' : ''}>Blog</a></li>
+            <li><a href={base + '/faq'} class={Astro.url.pathname.startsWith(base + '/faq') || Astro.url.pathname.startsWith('/faq') ? 'active' : ''}>FAQ</a></li>
+            <li><a href={base + '/contact'} class={Astro.url.pathname.startsWith(base + '/contact') || Astro.url.pathname.startsWith('/contact') ? 'active' : ''}>Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -46,7 +47,7 @@ const computedCanonical = canonical || canonicalFor(Astro.url.pathname);
     <footer class="site-footer">
       <div class="container">
         <p>&copy; {new Date().getFullYear()} Psychologist. Not for emergencies. If in crisis call local emergency services.</p>
-        <p class="muted">This site does not provide emergency mental health services. <a href="/emergency">Emergency & Crisis Resources</a> · <a href="/privacy">Privacy & Terms</a></p>
+        <p class="muted">This site does not provide emergency mental health services. <a href={base + '/emergency'}>Emergency & Crisis Resources</a> · <a href={base + '/privacy'}>Privacy & Terms</a></p>
       </div>
     </footer>
   </body>
