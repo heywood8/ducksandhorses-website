@@ -419,10 +419,14 @@ Content Guidelines:
 * [x] Accessibility baseline (skip link) – Skip link present, focus-visible styles added, semantic landmarks in layout.
 
 ### Phase 2 Checklist
-* [ ] Pages: About / Services / Conditions / FAQ / Contact / Privacy / Emergency / 404
-* [ ] Draft placeholder Markdown content collections
-* [ ] Structured navigation active states
-* [ ] Basic 404 with helpful links
+* [x] Pages scaffolded: About, Services (+ individual, couples, telehealth, modalities), Conditions (+ anxiety, depression, burnout), FAQ, Contact, Privacy & Terms, Emergency, 404.
+* [x] Placeholder markdown directories & sample files (`src/content/services`, `src/content/conditions`, `src/content/faq`).
+* [x] Navigation active states auto-applied via pathname logic (already from Phase 1 layout refactor).
+* [x] Contact form placeholder with accessibility semantics, honeypot & consent checkbox (submit disabled pending Phase 3 integration).
+* [x] Footer now includes Privacy & Terms and Emergency link.
+* [x] 404 page implemented with helpful links.
+
+Pending for later phases: dynamic collections wiring (Phase 4), structured data (Phase 3), form endpoint integration (Phase 3).
 
 ### Phase 3 Checklist
 * [ ] Contact form endpoint integration
