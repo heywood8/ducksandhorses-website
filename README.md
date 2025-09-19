@@ -1,5 +1,28 @@
 <div align="center">
 
+# Psychologist Website (Static Astro + TypeScript)
+
+Lean, privacy‑aware informational site with scheduling.
+ 
+![Deploy](https://github.com/heywood8/ducksandhorses-website/actions/workflows/deploy.yml/badge.svg)
+
+</div>
+
+---
+
+## Overview
+
+This repository hosts a minimal, fast Astro site for a solo psychologist. Current live scope focuses on clear information (About, Services, Conditions), disclaimers, and frictionless scheduling (Calendly popups). Legacy experimental features (blog, FAQ, newsletter, booking placeholder form, RSS) were removed to reduce maintenance overhead. They can be reintroduced later without architectural churn.
+
+Goals:
+* Establish credibility & scope of practice.
+* Provide emergency disclaimer & privacy positioning.
+* Offer simple scheduling links (intro + regular session) without storing PHI.
+* Maintain excellent performance and accessibility with very small JS footprint.
+
+Non‑goals (for now): blog/articles, newsletter signup, internationalization, complex analytics.
+<div align="center">
+
 # Psychologist Website (Static, TypeScript, GitHub Pages)
 
 Strategic development plan & implementation guide. This document is the authoritative roadmap the agentic workflow will follow phase by phase.
@@ -10,7 +33,7 @@ Strategic development plan & implementation guide. This document is the authorit
 
 ---
 
-## 0. Executive Summary
+## 1. Information Architecture
 
 Build a fast, accessible, trustworthy static website for a psychologist to:
 
@@ -32,7 +55,7 @@ Alternative fallback (if simplifying further): Vite + vanilla TS + static HTML t
 
 ---
 
-## 1. Personas & Value Proposition
+## 2. Information Architecture (Sitemap)
 
 | Persona | Needs / Questions | Site Response |
 |---------|------------------|---------------|
@@ -47,7 +70,7 @@ Value proposition statement (draft):
 
 ---
 
-## 2. Information Architecture (Sitemap)
+## 3. Content Model & Frontmatter Schemas
 
 ```
 /
@@ -80,7 +103,7 @@ Navigation Model:
 
 ---
 
-## 3. Content Model & Frontmatter Schemas
+## Tech Stack
 
 Standard frontmatter (YAML) for Markdown resources:
 
@@ -129,7 +152,7 @@ Global site config (JSON / TS export): logo paths, scheduling link aliases (if n
 
 ---
 
-## 4. Design System (Foundations)
+## Scheduling Implementation
 
 Principles: Empathetic, calm, readable, professional, inclusive.
 
@@ -165,7 +188,7 @@ Design Tokens: Expose as CSS variables (e.g., `--color-primary`, `--space-4`). O
 
 ---
 
-## 5. Technology Stack & Tooling
+## Current Structure (Trimmed)
 
 | Purpose | Choice | Rationale |
 |---------|--------|-----------|
@@ -184,7 +207,7 @@ Node Version: LTS (document exact version once initialized).
 
 ---
 
-## 6. Project Structure (Proposed)
+## Accessibility
 
 ```
 ducksandhorses_website/
@@ -226,7 +249,7 @@ Conventions:
 
 ---
 
-## 7. Accessibility (A11y) Standards
+## SEO & Structured Data
 
 Targets: WCAG 2.1 AA.
 * Color contrast ≥ 4.5:1 body text, 3:1 large text.
@@ -239,7 +262,7 @@ Targets: WCAG 2.1 AA.
 
 ---
 
-## 8. SEO & Structured Data Strategy
+## Privacy & Disclaimers
 
 On-page fundamentals:
 * Unique `<title>` + `<meta name="description">` per page.
@@ -263,7 +286,7 @@ Keyword Strategy (ethical): Focus on accurate descriptions, avoid over-optimizat
 
 ---
 
-## 9. Privacy, Ethics, Legal & Compliance
+## Deferred / Future (Optional)
 
 Key disclaimers (display on Schedule + footer link):
 * Not for emergencies: "If you are experiencing a crisis or emergency, call your local emergency number or a crisis hotline (e.g., 988 in the U.S.)."
@@ -279,7 +302,7 @@ GDPR/PHI Consideration: Because no health data is actively processed, keep forms
 
 ---
 
-## 10. Phased Development Roadmap
+## Tooling Scripts
 
 Each phase has goals, scope, acceptance criteria (AC), and success metrics (SM). Phases are incremental—deploy after each.
 
@@ -381,7 +404,7 @@ Rollback: Revert or cherry-pick fix onto `main`; new push triggers fresh deploy.
 
 ---
 
-## 14. Backlog (Future Enhancements)
+## Deployment
 
 * Appointment booking (Cal.com/Calendly embed).
 * Newsletter (Buttondown / Mailcoach) – double opt-in, minimal analytics.
@@ -410,7 +433,7 @@ Content Guidelines:
 
 ---
 
-## 16. Implementation Checklists
+## Quick Start
 
 ### Phase 0 Checklist
 * [ ] Initialize repo & Node version file (.nvmrc)
@@ -568,7 +591,7 @@ Optional future scripts:
 
 ---
 
-## 18. Metrics & Continuous Improvement
+## Quality Notes
 
 Track (post-launch):
 * Page views → schedule widget engagement (open / booking intent proxy).
@@ -604,7 +627,7 @@ Always maintain: accessibility, privacy, ethical compliance.
 
 ---
 
-## 21. Open Questions (To Clarify Before Certain Phases)
+## License
 
 | Topic | Question | Needed By Phase |
 |-------|----------|-----------------|
@@ -626,7 +649,9 @@ If unanswered by the listed phase, implement defaults & mark assumptions in CHAN
 
 ---
 
-## 23. License & Attribution
+---
+
+Historical extended roadmap & design rationale were pruned for clarity. Retrieve from git history if needed.
 
 Pending decision. If open-sourcing, include MIT with note excluding proprietary branding/content. Otherwise mark repository private or All Rights Reserved.
 

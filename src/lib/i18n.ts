@@ -12,9 +12,7 @@ const messages: Record<string, Record<string,string>> = {
     'nav.about': 'About',
     'nav.services': 'Services',
     'nav.conditions': 'Conditions',
-    'nav.blog': 'Blog',
-    'nav.faq': 'FAQ',
-    'nav.contact': 'Contact'
+    // Removed legacy entries: blog, faq, contact
   }
   // Additional locales can be added here.
 };
