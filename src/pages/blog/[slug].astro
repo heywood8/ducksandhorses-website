@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.filter(p => !p.data.draft).map(p => ({ params: { slug: p.slug } }));
+}
+
+const slug = Astro.params.slug as string;
+const entries = await getCollection('blog');
+const entry = entries.find(e => e.slug === slug);
+if (!entry || entry.data.draft) {
+  throw new Error('Not found');
+}
+
+const rendered = await entry.render();
+const bodyHtml: string = rendered?.html ?? '';
+const { title, description, publishDate, updatedDate, tags, heroImage, canonical } = entry.data;
+---
+<BlogPost
+  title={title}
+  description={description}
+  pubDate={publishDate}
+  updatedDate={updatedDate}
+  tags={tags}
+  heroImage={heroImage}
+  canonical={canonical}
+  bodyHtml={bodyHtml} />
