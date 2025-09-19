@@ -4,6 +4,8 @@
 
 Strategic development plan & implementation guide. This document is the authoritative roadmap the agentic workflow will follow phase by phase.
 
+![Deploy](https://github.com/heywood8/ducksandhorses-website/actions/workflows/deploy.yml/badge.svg)
+
 </div>
 
 ---
@@ -347,14 +349,20 @@ Branch Strategy:
 * `feature/*`: Short-lived feature branches → PR → CI checks.
 
 Deployment Flow:
-1. Merge to `main` triggers GitHub Action.
-2. Action builds Astro site → outputs `dist/`.
-3. Deploy job publishes to `gh-pages` branch.
-4. GitHub Pages serves from `gh-pages` root.
+1. Merge / push to `main` triggers two workflows:
+  * `CI` (`.github/workflows/ci.yml`) – typecheck, lint, build verification, artifact upload (for inspection).
+  * `Deploy` (`.github/workflows/deploy.yml`) – rebuilds, uploads `dist/` as a Pages artifact, and calls `actions/deploy-pages`.
+2. GitHub Pages is configured (Repository Settings → Pages) with Source = GitHub Actions (no branch selection needed with new Pages Actions flow).
+3. The deployed static site is served from the Pages environment URL (should match `site` in `astro.config.mjs`).
 
-Secrets Needed: (Probably none unless analytics or form provider requires key). If needed, add via repo settings.
+Notes:
+* Current `site` config: `https://heywood8.github.io/ducksandhorses_website` — ensure repository name alignment (rename repo or adjust `site` if changed to a vanity domain later).
+* Custom Domain: After adding a custom domain in Pages settings, also update `site` in `astro.config.mjs` and add DNS records (CNAME / A as instructed by GitHub) plus a `CNAME` file (GitHub auto-injects when configured).
+* Cache: Pages handles CDN caching; purge by redeploy (new commit) or updating domain settings.
 
-Rollback: Revert commit on `main` → redeploy.
+Secrets Needed: None for basic deployment. Add only if integrating analytics or external APIs later.
+
+Rollback: Revert or cherry-pick fix onto `main`; new push triggers fresh deploy.
 
 ---
 
