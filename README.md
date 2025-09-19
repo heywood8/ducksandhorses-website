@@ -51,7 +51,7 @@ Value proposition statement (draft):
 
 ```
 /
-  ├─ About
+  ├─ About me
   │    ├─ Approach & Philosophy
   │    └─ Qualifications / Credentials (licenses, education, affiliations)
   ├─ Services
@@ -74,7 +74,7 @@ Value proposition statement (draft):
 *Testimonials must comply with local regulations—some jurisdictions restrict psych professional testimonials; treat as optional configurable feature.
 
 Navigation Model:
-* Primary nav: About · Services · Conditions · Resources · FAQ · Contact
+* Primary nav: About me · Services · Conditions · Resources · FAQ · Contact
 * Utility footer: Privacy · Terms · Emergency · (Optional) Newsletter Signup · Social/Professional profiles (LinkedIn, PsychologyToday, etc.)
 * Persistent prominent crisis disclaimer (banner or footer microtext).
 
@@ -428,7 +428,7 @@ Content Guidelines:
 * [x] Accessibility baseline (skip link) – Skip link present, focus-visible styles added, semantic landmarks in layout.
 
 ### Phase 2 Checklist
-* [x] Pages scaffolded: About, Services (+ individual, couples, telehealth, modalities), Conditions (+ anxiety, depression, burnout), FAQ, Contact, Privacy & Terms, Emergency, 404.
+* [x] Pages scaffolded: Home/About (now merged as About me), Services (+ individual, couples, telehealth, modalities), Conditions (+ anxiety, depression, burnout), FAQ, Contact, Privacy & Terms, Emergency, 404.
 * [x] Placeholder markdown directories & sample files (`src/content/services`, `src/content/conditions`, `src/content/faq`).
 * [x] Navigation active states auto-applied via pathname logic (already from Phase 1 layout refactor).
 * [x] Contact form placeholder with accessibility semantics, honeypot & consent checkbox (submit disabled pending Phase 3 integration).
@@ -441,7 +441,7 @@ Pending for later phases: dynamic collections wiring (Phase 4), structured data 
 * [x] Site config centralization (`src/lib/siteConfig.ts`) with canonical builder.
 * [x] Canonical URL auto-generation in `Layout.astro` + head slot for structured data.
 * [x] Structured data component (`StructuredData.astro`).
-* [x] JSON-LD: Person (About), Service (Individual Therapy), FAQPage (FAQ). (More services can reuse pattern later.)
+* [x] JSON-LD: Person (About me root), Service (Individual Therapy), FAQPage (FAQ). (More services can reuse pattern later.)
 * [x] Contact form enhancements: form endpoint placeholder, dwell-time activation, honeypot, time-on-page hidden field.
 * [x] robots.txt added with sitemap reference.
 * [x] Dynamic sitemap endpoint (`/sitemap.xml`).
