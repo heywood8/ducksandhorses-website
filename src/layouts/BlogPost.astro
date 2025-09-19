@@ -57,7 +57,7 @@ const articleLd = {
           {tags.map(t => <li style="background:var(--color-surface-subtle);padding:2px 8px;border-radius:var(--radius-sm);font-size:var(--font-size-xs);"><a href={`${base}/blog/tags/${encodeURIComponent(t.toLowerCase())}`}>{t}</a></li>)}
         </ul>
       )}
-      {heroImage && <img src={heroImage} alt="" style="margin-top:var(--space-5);max-width:100%;border-radius:var(--radius-md);" />}
+  {heroImage && <img src={heroImage} alt="" loading="lazy" decoding="async" style="margin-top:var(--space-5);max-width:100%;border-radius:var(--radius-md);" />}
     </header>
     <div class="prose" set:html={bodyHtml} />
   </article>

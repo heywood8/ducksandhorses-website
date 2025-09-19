@@ -23,6 +23,33 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
+    <script>
+      // Prefetch internal links on hover (performance hint). Skips if user prefers reduced data.
+      (() => {
+        try {
+          const reduced = globalThis.matchMedia && globalThis.matchMedia('(prefers-reduced-data: reduce)').matches;
+          if (reduced) return;
+          const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+          const prefetch = (url) => {
+            if (!url.startsWith(base + '/')) return;
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = url;
+            document.head.appendChild(link);
+          };
+          document.addEventListener('mouseover', e => {
+            const a = e.target.closest('a');
+            if (!a || a.dataset.prefetched) return;
+            const href = a.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('http')) return;
+            a.dataset.prefetched = '1';
+            prefetch(a.href);
+          });
+        } catch (e) {
+          // fail silently
+        }
+      })();
+    </script>
     <header class="site-header" role="banner">
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;">
   <div class="logo" style="font-weight:600;font-size:var(--font-size-lg);"><a href={base + '/'} aria-label="Home">Ducks and horses</a></div>

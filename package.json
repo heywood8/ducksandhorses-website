@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "lint": "eslint . --ext .ts,.tsx,.astro",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "a11y": "npm run build && node scripts/a11y.mjs"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -19,9 +20,11 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
+    "axe-core": "^4.9.0",
     "eslint": "^8.57.0",
     "eslint-plugin-astro": "^1.0.0",
     "eslint-plugin-import": "^2.29.0",
+    "jsdom": "^24.0.0",
     "prettier": "^3.2.0",
     "prettier-plugin-astro": "^0.14.0",
     "typescript": "5.5.4"
