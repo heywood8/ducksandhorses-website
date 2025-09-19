@@ -65,8 +65,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             <li><a href={base + '/'} class={Astro.url.pathname === base + '/' || Astro.url.pathname === '/' ? 'active' : ''}>About me</a></li>
             <li><a href={base + '/services'} class={Astro.url.pathname.startsWith(base + '/services') || Astro.url.pathname.startsWith('/services') ? 'active' : ''}>Services</a></li>
             <li><a href={base + '/conditions'} class={Astro.url.pathname.startsWith(base + '/conditions') || Astro.url.pathname.startsWith('/conditions') ? 'active' : ''}>Conditions</a></li>
-            <li><a href={base + '/blog'} class={Astro.url.pathname.startsWith(base + '/blog') || Astro.url.pathname.startsWith('/blog') ? 'active' : ''}>Blog</a></li>
-            <li><a href={base + '/faq'} class={Astro.url.pathname.startsWith(base + '/faq') || Astro.url.pathname.startsWith('/faq') ? 'active' : ''}>FAQ</a></li>
             <li><a href={base + '/contact'} class={Astro.url.pathname.startsWith(base + '/contact') || Astro.url.pathname.startsWith('/contact') ? 'active' : ''}>Contact</a></li>
           </ul>
           <button type="button" id="theme-toggle" style="background:var(--color-bg-alt);border:1px solid var(--color-border);padding:4px 10px;border-radius:var(--radius-sm);cursor:pointer;font-size:var(--font-size-xs);">
