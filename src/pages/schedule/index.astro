@@ -19,6 +19,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </section>
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <style>
+    /* Lower Calendly popup a bit on small screens so close button doesn't clash with theme toggle */
+    @media (max-width: 640px) {
+      #calendlyOverlay { padding-top: 56px !important; }
+    }
+  </style>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const paramsBase = 'hide_event_type_details=1&hide_gdpr_banner=1';
@@ -40,6 +46,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       function openPopup(url){
         if(window.Calendly){
           window.Calendly.initPopupWidget({ url });
+          // Attempt to adjust overlay shortly after open (mobile only)
+          setTimeout(() => {
+            if (window.innerWidth < 640) {
+              const overlay = document.getElementById('calendlyOverlay');
+              if (overlay) overlay.style.paddingTop = '56px';
+            }
+          }, 150);
         } else {
           window.location.href = url; // fallback
         }
