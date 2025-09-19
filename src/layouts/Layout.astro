@@ -62,8 +62,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </div>
         <nav aria-label="Main navigation" style="display:flex;align-items:center;gap:var(--space-4);">
           <ul class="nav">
-            <li><a href={base + '/'} class={Astro.url.pathname === base + '/' || Astro.url.pathname === '/' ? 'active' : ''}>Home</a></li>
-            <li><a href={base + '/about'} class={Astro.url.pathname.startsWith(base + '/about') || Astro.url.pathname.startsWith('/about') ? 'active' : ''}>About</a></li>
+            <li><a href={base + '/'} class={Astro.url.pathname === base + '/' || Astro.url.pathname === '/' ? 'active' : ''}>About me</a></li>
             <li><a href={base + '/services'} class={Astro.url.pathname.startsWith(base + '/services') || Astro.url.pathname.startsWith('/services') ? 'active' : ''}>Services</a></li>
             <li><a href={base + '/conditions'} class={Astro.url.pathname.startsWith(base + '/conditions') || Astro.url.pathname.startsWith('/conditions') ? 'active' : ''}>Conditions</a></li>
             <li><a href={base + '/blog'} class={Astro.url.pathname.startsWith(base + '/blog') || Astro.url.pathname.startsWith('/blog') ? 'active' : ''}>Blog</a></li>

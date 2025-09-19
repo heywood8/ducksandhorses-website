@@ -1,36 +1,8 @@
 ---
-import StructuredData from '../../components/StructuredData.astro';
 import Layout from '../../layouts/Layout.astro';
-import { siteConfig, canonicalFor } from '../../lib/siteConfig';
-const person = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: siteConfig.author,
-  url: canonicalFor(Astro.url.pathname),
-  jobTitle: 'Psychologist',
-  description: 'Evidence-based, compassionate psychological care.',
-  sameAs: [
-    siteConfig.social.linkedIn || undefined,
-    siteConfig.social.directoryProfile || undefined
-  ].filter(Boolean)
-};
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<Layout title="About" description="About the practice: approach, philosophy, and qualifications.">
-  <Fragment slot="head">
-    <StructuredData data={person} />
-  </Fragment>
-  <h1>About This Practice</h1>
-  <p>Placeholder content. This page will outline therapeutic philosophy, evidence-based modalities, and professional stance. Future sections: Philosophy, Qualifications, Ethics.</p>
-  <section>
-    <h2>Approach & Philosophy (Preview)</h2>
-    <p>A brief empathetic statement about collaborative, evidence-based care. Full copy to be added in a later content pass.</p>
-  </section>
-  <section>
-    <h2>Qualifications Snapshot</h2>
-    <ul>
-      <li>Licensure: (Pending details)</li>
-      <li>Education: (Degrees / Institutions)</li>
-      <li>Memberships: (Associations)</li>
-    </ul>
-  </section>
+<Layout title="About (Moved)" description="This page has moved.">
+  <meta http-equiv="refresh" content={`0;url=${base}/`} />
+  <p>This page has moved. If you are not redirected automatically, <a href={base + '/'}>click here</a>.</p>
 </Layout>
