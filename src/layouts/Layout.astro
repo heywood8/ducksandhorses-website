@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Analytics from '../components/Analytics.astro';
 import Meta from '../components/Meta.astro';
-import { canonicalFor } from '../lib/siteConfig';
+import { canonicalFor, siteConfig } from '../lib/siteConfig';
 import '../styles/global.css';
 import headerImage from '../../public/images/ducksandhorses.jpg';
 
@@ -23,6 +23,8 @@ const computedCanonical = canonical || canonicalFor(pathname);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
   <Meta pageTitle={pageTitle} description={description} canonical={computedCanonical} noindex={noindex} />
+  <link rel="preconnect" href="https://assets.calendly.com" />
+  <link rel="dns-prefetch" href="https://assets.calendly.com" />
   <Analytics />
   <slot name="head" />
   </head>
@@ -59,7 +61,7 @@ const computedCanonical = canonical || canonicalFor(pathname);
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;">
   <div class="logo" style="display:flex;align-items:center;gap:var(--space-2);font-weight:600;font-size:var(--font-size-lg);">
     <a href={base + '/'} aria-label="Home" style="display:flex;align-items:center;gap:var(--space-2);text-decoration:none;color:inherit;">
-      <Image src={headerImage} alt="Therapeutic nature scene" width={40} height={40} style="border-radius:50%;object-fit:cover;display:block;" loading="lazy" decoding="async" />
+      <Image src={headerImage} alt="Портрет Анны Лопатиной, психолога" width={40} height={40} style="border-radius:50%;object-fit:cover;display:block;" loading="lazy" decoding="async" />
       <span>Анна Лопатина | Психолог</span>
     </a>
   </div>
@@ -85,6 +87,11 @@ const computedCanonical = canonical || canonicalFor(pathname);
     <footer class="site-footer">
       <div class="container">
   <p>&copy; {new Date().getFullYear()} Психолог.</p>
+  <p class="muted">
+    Контакт: <a href={`mailto:${siteConfig.contactEmail}`} aria-label="Написать письмо">{siteConfig.contactEmail.replace('@', ' [at] ')}</a>
+    <br />
+    <small>Ожидайте ответа в течение 1-2 рабочих дней.</small>
+  </p>
   <p class="muted">Сайт не предоставляет экстренную психиатрическую помощь. <a href={base + '/emergency'}>Экстренные ресурсы</a> · <a href={base + '/privacy'}>Конфиденциальность и условия</a></p>
       </div>
     </footer>
