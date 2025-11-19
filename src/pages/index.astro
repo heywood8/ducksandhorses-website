@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import StructuredData from '../components/StructuredData.astro';
 import { siteConfig, canonicalFor } from '../lib/siteConfig';
+import heroImage from '../../public/images/ducksandhorses.jpg';
 const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -28,11 +30,11 @@ const person = {
       </div>
     </div>
     <div class="hero-media">
-      <img
-        src={import.meta.env.BASE_URL.replace(/\/$/, '') + '/images/ducksandhorses.jpg'}
+      <Image
+        src={heroImage}
         alt="Это я!"
-        width="480"
-        height="600"
+        width={480}
+        height={600}
         loading="lazy"
         decoding="async"
         style="width:100%;height:auto;border-radius:var(--radius-lg);object-fit:cover;box-shadow:var(--shadow-md);"
