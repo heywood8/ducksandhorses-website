@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Analytics from '../components/Analytics.astro';
 import Meta from '../components/Meta.astro';
 import { canonicalFor } from '../lib/siteConfig';
 import '../styles/global.css';
+import headerImage from '../../public/images/ducksandhorses.jpg';
 
 interface Props {
   description?: string;
@@ -57,7 +59,7 @@ const computedCanonical = canonical || canonicalFor(pathname);
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;">
   <div class="logo" style="display:flex;align-items:center;gap:var(--space-2);font-weight:600;font-size:var(--font-size-lg);">
     <a href={base + '/'} aria-label="Home" style="display:flex;align-items:center;gap:var(--space-2);text-decoration:none;color:inherit;">
-      <img src="https://cdn4.telesco.pe/file/lhKH1rR6CKioFcjlwQUXSGrNnqJQiHO61OyZOYIICyvXymGBwADHYUGcJ31EnicWPitGOEChiOofjPM2x9OzvITtI9RiwD72CjvIK4KmJq8VVV6Bx7bfwLk3a_Cq3_WKW8yHAKd62HrLQOiDJeTSqheGvIrKrn9GhFRY-eToVq2quCP2GwtWUmlRLxZhX8tbxVtqbnJS4UsJ7lkbblQtaC_FqL_hYWiU0wDzv0RY26mmB0zYHJIUSrXKJZiqsDxtNU8aCubZBBBQTPAgmMDsibHhQLInJCWSVsIOFc3utTbKCpbaJIcJFaagXLtFDmGYY3PxshYid8Kzy3eCdMztwQ.jpg" alt="Therapeutic nature scene" width="40" height="40" style="border-radius:50%;object-fit:cover;display:block;" loading="lazy" decoding="async" />
+      <Image src={headerImage} alt="Therapeutic nature scene" width={40} height={40} style="border-radius:50%;object-fit:cover;display:block;" loading="lazy" decoding="async" />
       <span>Анна Лопатина | Психолог</span>
     </a>
   </div>
