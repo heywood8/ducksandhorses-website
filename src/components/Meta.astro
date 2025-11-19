@@ -1,8 +1,8 @@
 ---
 /**
  * Meta component (Phase 1)
- * Props: title (string), description (string), canonical (string optional), noindex (boolean optional)
- * Sets standard meta tags + basic OpenGraph & Twitter card placeholders.
+ * Props: title (string), description (string), canonical (string optional), noindex (boolean optional), ogImage (string optional)
+ * Sets standard meta tags + OpenGraph & Twitter card support with social sharing images.
  */
 interface Props {
   /* The following props remain for meta/OG flexibility, but the <title> tag is now fixed to the clinician name. */
@@ -11,12 +11,15 @@ interface Props {
   noindex?: boolean;
   /* Optional: pageTitle can override OG meta title if needed, but not the tab title */
   pageTitle?: string;
+  /* Optional: custom OG image URL (absolute or relative to BASE_URL) */
+  ogImage?: string;
 }
 const {
   description = 'Evidence-based, compassionate psychological care.',
   canonical,
   noindex = false,
-  pageTitle
+  pageTitle,
+  ogImage
 } = Astro.props as Props;
 
 // Fixed brand/clinician name for browser tab
@@ -25,6 +28,11 @@ const tabTitle = 'Anna Lopatina';
 const ogTitle = pageTitle || tabTitle;
 const siteName = 'Anna Lopatina';
 const url = canonical || Astro.site?.href || '';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Default social card image (1200x630px recommended for OG)
+// TODO: Create actual social-card-og.png image
+const defaultOgImage = Astro.site ? new URL(base + '/images/social-card-og.png', Astro.site).href : '';
+const ogImageUrl = ogImage || defaultOgImage;
 ---
 <title>{tabTitle}</title>
 <meta name="description" content={description} />
@@ -36,6 +44,10 @@ const url = canonical || Astro.site?.href || '';
 <meta property="og:title" content={ogTitle} />
 <meta property="og:description" content={description} />
 {url && <meta property="og:url" content={url} />}
-<meta name="twitter:card" content="summary" />
+{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+{ogImageUrl && <meta property="og:image:width" content="1200" />}
+{ogImageUrl && <meta property="og:image:height" content="630" />}
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={ogTitle} />
 <meta name="twitter:description" content={description} />
+{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}

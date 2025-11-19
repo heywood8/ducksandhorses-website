@@ -61,7 +61,7 @@ const computedCanonical = canonical || canonicalFor(pathname);
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;">
   <div class="logo" style="display:flex;align-items:center;gap:var(--space-2);font-weight:600;font-size:var(--font-size-lg);">
     <a href={base + '/'} aria-label="Home" style="display:flex;align-items:center;gap:var(--space-2);text-decoration:none;color:inherit;">
-      <Image src={headerImage} alt="Портрет Анны Лопатиной, психолога" width={40} height={40} style="border-radius:50%;object-fit:cover;display:block;" loading="lazy" decoding="async" />
+      <Image src={headerImage} alt="Портрет Анны Лопатиной, психолога" width={40} height={40} format="webp" quality={85} style="border-radius:50%;object-fit:cover;display:block;" loading="lazy" decoding="async" />
       <span>Анна Лопатина | Психолог</span>
     </a>
   </div>
