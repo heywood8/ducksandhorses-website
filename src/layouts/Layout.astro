@@ -156,6 +156,9 @@ const computedCanonical = canonical || canonicalFor(pathname);
         var pref = localStorage.getItem('theme');
         if (pref === 'dark' || pref === 'light') {
           root.setAttribute('data-theme', pref);
+        } else {
+          // Always set data-theme so [data-theme] CSS selectors apply consistently
+          root.setAttribute('data-theme', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         }
         var btn = document.getElementById('theme-toggle');
         if (!btn) return;
