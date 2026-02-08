@@ -96,7 +96,7 @@
   }
 }
 
-[data-theme='dark'] {
+:root[data-theme='dark'] {
   --color-bg: #1a1f1c;
   --color-bg-alt: #242b26;
   --color-fg: #ede9e3;
@@ -105,7 +105,7 @@
   --color-surface: #242b26;
 }
 
-[data-theme='light'] {
+:root[data-theme='light'] {
   --color-bg: #faf8f5;
   --color-bg-alt: #f0ece6;
   --color-fg: #2d3436;
