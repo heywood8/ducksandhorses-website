@@ -1,20 +1,10 @@
 import { siteConfig } from '../lib/siteConfig';
 
-// Basic sitemap (Phase 3). Later we can auto-discover content collections.
 export async function GET() {
   const base = siteConfig.url.replace(/\/$/, '');
   const staticPaths = [
-    '/', // Главная (Обо мне)
-    '/services/',
-    '/services/individual/',
-    '/services/couples/',
-    '/services/telehealth/',
-    '/services/modalities/',
-    '/conditions/',
-    '/conditions/anxiety/',
-    '/conditions/depression/',
-    '/conditions/burnout/',
-  '/schedule/',
+    '/',
+    '/schedule/',
     '/privacy/',
     '/emergency/'
   ];
