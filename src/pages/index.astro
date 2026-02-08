@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import StructuredData from '../components/StructuredData.astro';
 import { siteConfig, canonicalFor } from '../lib/siteConfig';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const telegramUrl = 'https://t.me/ducksandhorses';
 const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -15,93 +17,223 @@ const person = {
   ].filter(Boolean)
 };
 ---
-<Layout title="Обо мне" description="Подход, ценности и квалификация." canonical={canonicalFor('/')}> 
+<Layout description="Психологическая поддержка онлайн — тревога, стресс, выгорание, подавленность." canonical={canonicalFor('/')}>
   <Fragment slot="head">
     <StructuredData data={person} />
   </Fragment>
-  <section class="hero hero-grid fade-in">
-    <div class="hero-text">
-      <h1>Психологическая поддержка онлайн</h1>
-      <p class="lead">Помогаю, когда тревога, стресс, выгорание, подавленность, спутанные мысли или сложности в отношениях с собой и другими мешают ясно жить и действовать.</p>
-      <div class="hero-actions">
-        <a href={import.meta.env.BASE_URL.replace(/\/$/, '') + '/schedule'} class="btn">Записаться</a>
+
+  <!-- 1. Hero -->
+  <section class="hero">
+    <div class="container-wide">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <h1>Психологическая поддержка онлайн</h1>
+          <p class="lead">Помогаю, когда тревога, стресс, выгорание, подавленность, спутанные мысли или сложности в отношениях с собой и другими мешают ясно жить и действовать.</p>
+          <div class="hero-actions">
+            <a href={telegramUrl} target="_blank" rel="noopener" class="btn">Начать с бесплатного знакомства</a>
+            <a href="#about" class="btn-outline">Узнать больше</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img
+            src={base + '/images/ducksandhorses.jpg'}
+            alt="Анна Лопатина — психолог"
+            width="480"
+            height="600"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
       </div>
     </div>
-    <div class="hero-media">
-      <img
-        src="https://cdn4.telesco.pe/file/lhKH1rR6CKioFcjlwQUXSGrNnqJQiHO61OyZOYIICyvXymGBwADHYUGcJ31EnicWPitGOEChiOofjPM2x9OzvITtI9RiwD72CjvIK4KmJq8VVV6Bx7bfwLk3a_Cq3_WKW8yHAKd62HrLQOiDJeTSqheGvIrKrn9GhFRY-eToVq2quCP2GwtWUmlRLxZhX8tbxVtqbnJS4UsJ7lkbblQtaC_FqL_hYWiU0wDzv0RY26mmB0zYHJIUSrXKJZiqsDxtNU8aCubZBBBQTPAgmMDsibHhQLInJCWSVsIOFc3utTbKCpbaJIcJFaagXLtFDmGYY3PxshYid8Kzy3eCdMztwQ.jpg"
-        alt="Это я!"
-        width="480"
-        height="600"
-        loading="lazy"
-        decoding="async"
-        style="width:100%;height:auto;border-radius:var(--radius-lg);object-fit:cover;box-shadow:var(--shadow-md);"
-      />
+  </section>
+
+  <!-- 2. About -->
+  <section class="section-alt" id="about" aria-labelledby="about-heading">
+    <div class="container-wide">
+      <h2 id="about-heading">Обо мне</h2>
+      <div class="about-content">
+        <p>Первая встреча — это знакомство и прояснение запроса. Мы формулируем, что именно мешает: эмоциональные состояния, циклы самообесценивания, навязчивые «круги» в голове, потерянность, повторяющиеся паттерны поведения или трудности в профессии. Дальше вы решаете — продолжать ли регулярные консультации.</p>
+        <p>Работа строится на сотрудничестве, ясности целей и постепенной устойчивой перемене — не «быстрых советах», а развитии навыков саморегуляции, самосострадания, гибкости мышления и поведения.</p>
+        <p>Интегрирую: подход внутренних систем (IFS-ориентированная работа с частями), процессы осознанности, поведенческие и когнитивные интервенции, фокус на теле и контексте.</p>
+        <p><strong>Ценности:</strong> уважение к автономии, прозрачность, этика, культурная чувствительность, бережность к темпу, измеримость прогресса.</p>
+      </div>
     </div>
   </section>
 
-  <section class="about-block">
-    <h2>Как я работаю</h2>
-    <p>Первая встреча — это знакомство и прояснение запроса. Мы формулируем, что именно мешает: эмоциональные состояния, циклы самообесценивания, навязчивые «круги» в голове, потерянность, повторяющиеся паттерны поведения или трудности в профессии. Дальше вы решаете — продолжать ли регулярные консультации.</p>
-    <p>Работа строится на сотрудничестве, ясности целей и постепенной устойчивой перемене — не ‘быстрых советах’, а развитии навыков саморегуляции, самосострадания, гибкости мышления и поведения.</p>
-    <p>Интегрирую: элементы ACT (терапия принятия и ответственности), подход внутренних систем (IFS-ориентированная работа с частями), процессы осознанности, поведенческие и когнитивные интервенции, фокус на теле и контексте. Регулярно отражаем динамику: что меняется и что пока «застряло».</p>
-    <p><strong>Ценности:</strong> уважение к автономии, прозрачность, этика, культурная чувствительность, бережность к темпу, измеримость прогресса (но без превращения процесса в гонку).</p>
+  <!-- 3. Process Steps -->
+  <section class="section" aria-labelledby="process-heading">
+    <div class="container-wide">
+      <h2 id="process-heading">Этапы работы</h2>
+      <ol class="steps">
+        <li>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Знакомство</h3>
+          <p>Первая встреча: фиксируем, что именно беспокоит, и определяем — подходит ли формат.</p>
+        </li>
+        <li>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Фокусировка</h3>
+          <p>Собираем карту: эмоциональные циклы, поведенческие петли, избегание, внутренние части.</p>
+        </li>
+        <li>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3>Исследование</h3>
+          <p>Углубляемся в причины: что стоит за симптомами, какие защитные механизмы действуют.</p>
+        </li>
+        <li>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Практика</h3>
+          <p>Навыки присутствия, диалог с внутренними состояниями, расширение поведенческой гибкости.</p>
+        </li>
+        <li>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          </div>
+          <h3>Интеграция</h3>
+          <p>Закрепление изменений, перевод результатов в устойчивые опоры повседневности.</p>
+        </li>
+        <li>
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Устойчивость</h3>
+          <p>Опора на внутренние ресурсы, снижение зависимости от терапии, уверенность в своих силах.</p>
+        </li>
+      </ol>
+    </div>
   </section>
 
-  <section class="qualifications">
-    <h2>Формат и структура</h2>
-    <ul class="list-plain">
-      <li><strong>Первая встреча (знакомство)</strong> — 30 минут, бесплатно. Цель: понять, подходит ли вам формат и мой подход.</li>
-      <li><strong>Регулярная консультация</strong> — 55 минут, 1500 ₽. Частота обычно 1 раз в неделю (можно реже по согласованию).</li>
-      <li>Онлайн (видеосвязь). Тишина и приватность со вашей стороны — важная часть безопасности процесса.</li>
-    </ul>
+  <!-- 4. What makes this different -->
+  <section class="section-alt" aria-labelledby="diff-heading">
+    <div class="container-wide">
+      <h2 id="diff-heading">Чем это отличается</h2>
+      <div class="diff-grid">
+        <div class="diff-item">
+          <h3>Причины, а не симптомы</h3>
+          <p>Работаем не с поверхностными проявлениями, а с тем, что их запускает — паттернами, убеждениями, эмоциональными циклами.</p>
+        </div>
+        <div class="diff-item">
+          <h3>Бережность к темпу</h3>
+          <p>Нет давления «исправиться быстрее». Мы двигаемся с той скоростью, которая позволяет изменениям закрепиться.</p>
+        </div>
+        <div class="diff-item">
+          <h3>Навыки остаются с вами</h3>
+          <p>Цель — не вечная терапия, а развитие внутренних ресурсов, которые работают и после завершения.</p>
+        </div>
+        <div class="diff-item">
+          <h3>Научная основа</h3>
+          <p>IFS, когнитивно-поведенческие интервенции, осознанность — методы с доказанной эффективностью.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="process-steps" aria-labelledby="process-heading">
-    <h2 id="process-heading">Этапы взаимодействия</h2>
-    <ol class="steps">
-      <li>
-        <h3>1. Знакомство</h3>
-        <p>Первая встреча: фиксируем, что именно беспокоит, и определяем — продолжаем ли.</p>
-      </li>
-      <li>
-        <h3>2. Фокусировка</h3>
-        <p>Собираем карту: эмоциональные циклы, поведенческие петли, избегание, внутренние части.</p>
-      </li>
-      <li>
-        <h3>3. Практика</h3>
-        <p>Навыки присутствия, диалог с внутренними состояниями, расширение поведенческой гибкости.</p>
-      </li>
-      <li>
-        <h3>4. Интеграция</h3>
-        <p>Закрепление изменений, перевод результатов в устойчивые опоры повседневности.</p>
-      </li>
-    </ol>
+  <!-- 5. Specialties -->
+  <section class="section" id="specialties" aria-labelledby="specialties-heading">
+    <div class="container-wide">
+      <h2 id="specialties-heading">С чем можно обратиться</h2>
+      <div class="specialties-grid">
+        <div class="card">
+          <h3>Подход</h3>
+          <ul>
+            <li>IFS — работа с внутренними частями</li>
+            <li>Когнитивно-поведенческие интервенции</li>
+            <li>Практики осознанности (mindfulness)</li>
+            <li>Телесно-ориентированный фокус</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Темы</h3>
+          <ul>
+            <li>Тревога и панические состояния</li>
+            <li>Стресс и выгорание</li>
+            <li>Подавленность и потеря мотивации</li>
+            <li>Внутренний критик, самообесценивание</li>
+            <li>Прокрастинация, чувство застревания</li>
+            <li>Эмоциональная нестабильность</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Для кого</h3>
+          <ul>
+            <li>Нарастающее напряжение до обострения</li>
+            <li>Повторяющиеся паттерны в отношениях</li>
+            <li>Сложности самоидентификации</li>
+            <li>Адаптация после изменений</li>
+            <li>Потребность в ясности и опоре</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="faq" aria-labelledby="faq-heading">
-    <h2 id="faq-heading">Частые вопросы</h2>
-    <div class="faq-items">
-      <details>
-        <summary>С какими запросами можно прийти?</summary>
-        <p>Тревога, стресс и выгорание, подавленность, утрата мотивации, внутренний критик, прокрастинация, эмоциональная нестабильность, чувство застревания, сложности самоидентификации, повторяющиеся отношения «по кругу», адаптация после изменений.</p>
-      </details>
-      <details>
-        <summary>Сколько длится консультация?</summary>
-        <p>Регулярная — 55 минут. Первая встреча (знакомство) — 30 минут.</p>
-      </details>
-      <details>
-        <summary>Это терапия или коучинг?</summary>
-        <p>Формат — психотерапевтические консультации с интеграцией методов. Цель — не мотивационные лозунги, а устойчивая внутренняя опора.</p>
-      </details>
-      <details>
-        <summary>Онлайн эффективно?</summary>
-        <p>Да, для большинства запросов. Важны регулярность и безопасное пространство со вашей стороны.</p>
-      </details>
-      <details>
-        <summary>Что если мне пока «не так плохо»?</summary>
-        <p>Близость к кризису не обязательна. Часто люди приходят, когда чувствуют нарастающее напряжение и хотят сориентироваться до обострения.</p>
-      </details>
+  <!-- 6. Pricing -->
+  <section class="section-alt" id="pricing" aria-labelledby="pricing-heading">
+    <div class="container-wide">
+      <h2 id="pricing-heading">Формат и стоимость</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Знакомство</h3>
+          <div class="pricing-duration">30 минут</div>
+          <div class="pricing-price">Бесплатно</div>
+          <p class="pricing-desc">Понять, подходит ли вам формат и мой подход. Без обязательств.</p>
+          <a href={telegramUrl} target="_blank" rel="noopener" class="btn-cta">Написать в Telegram</a>
+        </div>
+        <div class="pricing-card pricing-card--featured">
+          <h3>Консультация</h3>
+          <div class="pricing-duration">55 минут</div>
+          <div class="pricing-price">2500₽ / 13000Դ</div>
+          <p class="pricing-desc">Регулярные встречи, обычно 1 раз в неделю. Онлайн, видеосвязь.</p>
+          <a href={telegramUrl} target="_blank" rel="noopener" class="btn-cta">Написать в Telegram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section class="section" id="faq" aria-labelledby="faq-heading">
+    <div class="container-wide">
+      <h2 id="faq-heading">Частые вопросы</h2>
+      <div class="faq-items">
+        <details>
+          <summary>С какими запросами можно прийти?</summary>
+          <p>Тревога, стресс и выгорание, подавленность, утрата мотивации, внутренний критик, прокрастинация, эмоциональная нестабильность, чувство застревания, сложности самоидентификации, повторяющиеся отношения «по кругу», адаптация после изменений.</p>
+        </details>
+        <details>
+          <summary>Сколько длится консультация?</summary>
+          <p>Регулярная — 55 минут. Первая встреча (знакомство) — 30 минут.</p>
+        </details>
+        <details>
+          <summary>Это терапия или коучинг?</summary>
+          <p>Формат — психотерапевтические консультации с интеграцией методов. Цель — не мотивационные лозунги, а устойчивая внутренняя опора.</p>
+        </details>
+        <details>
+          <summary>Онлайн эффективно?</summary>
+          <p>Да, для большинства запросов. Важны регулярность и безопасное пространство с вашей стороны.</p>
+        </details>
+        <details>
+          <summary>Что если мне пока «не так плохо»?</summary>
+          <p>Близость к кризису не обязательна. Часто люди приходят, когда чувствуют нарастающее напряжение и хотят сориентироваться до обострения.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Final CTA Banner -->
+  <section class="section-cta">
+    <div class="container-wide">
+      <h2>Готовы сделать первый шаг?</h2>
+      <p style="margin-bottom:var(--space-5);opacity:0.9;font-size:var(--font-size-md);">Первая встреча — 30 минут, бесплатно и без обязательств.</p>
+      <a href={telegramUrl} target="_blank" rel="noopener" class="btn">Записаться на знакомство</a>
     </div>
   </section>
 </Layout>

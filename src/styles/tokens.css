@@ -1,43 +1,43 @@
-/* Design Tokens (Phase 1)
-   Source of truth for colors, spacing, typography scale, radii, shadows.
-   Future phases may automate generation from a tokens.ts file. */
+/* Design Tokens — warm sage/cream palette inspired by rachelheals.com */
 :root {
   /* Colors */
-  --color-primary: #0f766e; /* Teal 600 */
-  --color-primary-light: #ccfbf1; /* Teal 100 */
-  --color-accent: #7c7ba3; /* Lavender */
-  --color-bg: #ffffff; /* Surface */
-  --color-bg-alt: #f1f5f9; /* Neutral Light */
-  --color-fg: #0f172a; /* Neutral Dark */
-  --color-fg-mid: #475569; /* Neutral Mid */
-  --color-border: #e2e8f0; /* slate-200 approximation */
-  --color-focus: #0f766e; /* same as primary for now */
-  --color-danger: #b91c1c; /* red-700 */
-  --color-warning: #b45309; /* amber-600 */
-  --color-success: #047857; /* green-700 */
-  --color-info: #0369a1; /* sky-700 */
+  --color-primary: #5b8a72;
+  --color-primary-light: #e8f0eb;
+  --color-accent: #c4a882;
+  --color-bg: #faf8f5;
+  --color-bg-alt: #f0ece6;
+  --color-fg: #2d3436;
+  --color-fg-mid: #636e72;
+  --color-border: #e0dbd3;
+  --color-surface: #ffffff;
+  --color-focus: #5b8a72;
+  --color-danger: #b91c1c;
+  --color-warning: #b45309;
+  --color-success: #047857;
+  --color-info: #0369a1;
 
   /* Typography */
-  --font-sans: system-ui,-apple-system,'Segoe UI',Roboto,Inter,sans-serif;
-  --font-serif: 'Merriweather', Georgia, serif;
+  --font-heading: 'DM Sans', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
-  /* Font sizes (modular scale 1.125) */
-  --font-size-xs: 0.75rem; /* 12 */
-  --font-size-sm: 0.875rem; /* 14 */
-  --font-size-base: 1rem; /* 16 */
-  --font-size-md: 1.125rem; /* 18 */
-  --font-size-lg: 1.266rem; /* 20 */
-  --font-size-xl: 1.424rem; /* 23 */
-  --font-size-2xl: 1.602rem; /* 26 */
-  --font-size-3xl: 1.802rem; /* 29 */
-  --font-size-4xl: 2.027rem; /* 32-33 */
+  /* Font sizes (bumped base to 17px, expanded scale) */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1.0625rem;
+  --font-size-md: 1.1875rem;
+  --font-size-lg: 1.375rem;
+  --font-size-xl: 1.5625rem;
+  --font-size-2xl: 1.875rem;
+  --font-size-3xl: 2.25rem;
+  --font-size-4xl: 2.75rem;
+  --font-size-5xl: 3.5rem;
 
   /* Line heights */
-  --line-height-tight: 1.2;
+  --line-height-tight: 1.15;
   --line-height-snug: 1.3;
-  --line-height-normal: 1.55;
-  --line-height-relaxed: 1.7;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.75;
 
   /* Spacing scale */
   --space-0: 0;
@@ -50,20 +50,27 @@
   --space-7: 40px;
   --space-8: 56px;
   --space-9: 72px;
+  --space-10: 100px;
+  --space-11: 120px;
 
   /* Radii */
   --radius-sm: 3px;
   --radius-md: 6px;
   --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
   --radius-round: 9999px;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.06), 0 1px 1px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.10), 0 2px 4px -1px rgba(0,0,0,0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.10), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.08);
 
   /* Content width */
   --content-max: 70ch;
+  --content-max-wide: 1200px;
 
   /* Transition */
   --transition-fast: 120ms ease;
@@ -80,29 +87,29 @@
 /* Dark mode (auto + manual override) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0f172a;
-    --color-bg-alt: #1e293b;
-    --color-fg: #f1f5f9;
-    --color-fg-mid: #cbd5e1;
-    --color-border: #334155;
-    --color-surface: #1e293b;
+    --color-bg: #1a1f1c;
+    --color-bg-alt: #242b26;
+    --color-fg: #ede9e3;
+    --color-fg-mid: #b8b2a8;
+    --color-border: #3a4038;
+    --color-surface: #242b26;
   }
 }
 
 [data-theme='dark'] {
-  --color-bg: #0f172a;
-  --color-bg-alt: #1e293b;
-  --color-fg: #f1f5f9;
-  --color-fg-mid: #cbd5e1;
-  --color-border: #334155;
-  --color-surface: #1e293b;
+  --color-bg: #1a1f1c;
+  --color-bg-alt: #242b26;
+  --color-fg: #ede9e3;
+  --color-fg-mid: #b8b2a8;
+  --color-border: #3a4038;
+  --color-surface: #242b26;
 }
 
 [data-theme='light'] {
-  --color-bg: #ffffff;
-  --color-bg-alt: #f1f5f9;
-  --color-fg: #0f172a;
-  --color-fg-mid: #475569;
-  --color-border: #e2e8f0;
+  --color-bg: #faf8f5;
+  --color-bg-alt: #f0ece6;
+  --color-fg: #2d3436;
+  --color-fg-mid: #636e72;
+  --color-border: #e0dbd3;
   --color-surface: #ffffff;
 }
